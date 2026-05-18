@@ -243,7 +243,8 @@
             localStorage.setItem('audit_queue', JSON.stringify(queue));
 
             try {
-                const res = await fetch('http://86.40.161.89:5050/api/audit', {
+                const target = localStorage.getItem('api_endpoint') || 'https://experience-modems-safer-coaching.trycloudflare.com';
+                const res = await fetch(target + '/api/audit', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
