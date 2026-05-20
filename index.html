@@ -4,402 +4,1025 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Site Reports — DS Studios</title>
-    <meta name="description" content="Free, expert website audits for Irish hotels and hospitality businesses. SEO, performance, mobile, design — delivered to your inbox.">
+    <meta name="description" content="Free, expert website audits for Irish businesses. SEO, performance, mobile, design, content — delivered to your inbox.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #f9fafb;
-            color: #1e293b;
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-        }
-        .container { max-width: 640px; margin: 0 auto; padding: 0 24px; }
+        @layer reset, base, components, utilities, animations;
 
-        /* Nav */
-        .nav {
-            padding: 24px 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .nav-brand {
-            font-size: 1rem;
-            font-weight: 600;
-            letter-spacing: -0.01em;
-            color: #0f172a;
-        }
-        .nav-brand span { color: #6366f1; }
-        .nav-tag {
-            font-size: .75rem;
-            color: #64748b;
-            background: #f1f5f9;
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-weight: 500;
+        @layer reset {
+            *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+            html { scroll-behavior: smooth; }
+            body { min-height: 100vh; }
+            img, svg { display: block; max-width: 100%; }
+            button { font: inherit; cursor: pointer; }
+            a { color: inherit; text-decoration: none; }
         }
 
-        /* Hero */
-        .hero {
-            padding: 72px 0 48px;
-        }
-        .hero-badge {
-            display: inline-block;
-            background: #eef2ff;
-            color: #6366f1;
-            font-size: .75rem;
-            font-weight: 600;
-            padding: 4px 12px;
-            border-radius: 4px;
-            margin-bottom: 24px;
-            letter-spacing: .02em;
-            text-transform: uppercase;
-        }
-        .hero h1 {
-            font-size: 2.25rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            line-height: 1.15;
-            margin-bottom: 16px;
-            color: #0f172a;
-        }
-        .hero h1 span { color: #6366f1; }
-        .hero p {
-            color: #64748b;
-            font-size: 1.05rem;
-            max-width: 480px;
-            line-height: 1.6;
-        }
-        .hero .cta-row {
-            margin-top: 32px;
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-        .hero .cta {
-            display: inline-block;
-            background: #0f172a;
-            color: #fff;
-            font-weight: 500;
-            padding: 12px 28px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: .9rem;
-            transition: background .2s;
-        }
-        .hero .cta:hover { background: #1e293b; }
-        .hero .cta-sub {
-            font-size: .85rem;
-            color: #94a3b8;
+        @layer base {
+            :root {
+                --bg-deep: #070b1a;
+                --bg-mid: #0d1233;
+                --bg-surface: rgba(255,255,255,0.03);
+                --bg-glass: rgba(255,255,255,0.04);
+                --bg-glass-hover: rgba(255,255,255,0.08);
+                --border-glass: rgba(255,255,255,0.06);
+                --border-glass-hover: rgba(255,255,255,0.12);
+                --accent: #2dd4bf;
+                --accent-dim: rgba(45,212,191,0.3);
+                --accent-glow: rgba(45,212,191,0.08);
+                --text-primary: #f1f5f9;
+                --text-secondary: #94a3b8;
+                --text-muted: #475569;
+                --error: #f87171;
+                --success: #34d399;
+                --radius: 12px;
+                --radius-sm: 8px;
+                --space-xs: 4px;
+                --space-sm: 8px;
+                --space-md: 16px;
+                --space-lg: 32px;
+                --space-xl: 48px;
+                --space-2xl: 80px;
+                --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                --nav-height: 72px;
+            }
+
+            body {
+                font-family: var(--font);
+                background: var(--bg-deep);
+                color: var(--text-primary);
+                line-height: 1.6;
+                -webkit-font-smoothing: antialiased;
+                overflow-x: hidden;
+            }
+
+            /* ── Background: Layered animated gradient orbs ── */
+            body::before,
+            body::after {
+                content: '';
+                position: fixed;
+                width: 100vw;
+                height: 100vh;
+                top: 0;
+                left: 0;
+                pointer-events: none;
+                z-index: -2;
+            }
+
+            body::before {
+                background:
+                    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(45,212,191,0.08) 0%, transparent 60%),
+                    radial-gradient(ellipse 60% 80% at 80% 90%, rgba(99,102,241,0.06) 0%, transparent 60%),
+                    radial-gradient(ellipse 50% 50% at 50% 50%, rgba(139,92,246,0.04) 0%, transparent 50%);
+                animation: orbDrift 30s ease-in-out infinite alternate;
+            }
+
+            body::after {
+                background:
+                    radial-gradient(ellipse 50% 50% at 70% 20%, rgba(45,212,191,0.06) 0%, transparent 50%),
+                    radial-gradient(ellipse 40% 60% at 30% 80%, rgba(139,92,246,0.05) 0%, transparent 50%);
+                animation: orbDriftReverse 25s ease-in-out infinite alternate;
+            }
+
+            @keyframes orbDrift {
+                0% { transform: translate(0, 0) scale(1); }
+                33% { transform: translate(2%, -3%) scale(1.05); }
+                66% { transform: translate(-1%, 2%) scale(0.95); }
+                100% { transform: translate(1%, -1%) scale(1.02); }
+            }
+
+            @keyframes orbDriftReverse {
+                0% { transform: translate(0, 0) scale(1); }
+                33% { transform: translate(-2%, 1%) scale(0.95); }
+                66% { transform: translate(1%, -2%) scale(1.05); }
+                100% { transform: translate(-1%, 1%) scale(0.98); }
+            }
+
+            /* ── Subtle grid overlay ── */
+            .bg-grid {
+                position: fixed;
+                inset: 0;
+                pointer-events: none;
+                z-index: -1;
+                background-image:
+                    linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+                background-size: 64px 64px;
+            }
         }
 
-        /* Section */
-        .section-title {
-            font-size: .8rem;
-            font-weight: 600;
-            color: #94a3b8;
-            text-transform: uppercase;
-            letter-spacing: .06em;
-            margin-bottom: 20px;
+        @layer components {
+            /* ── Glass ── */
+            .glass {
+                background: var(--bg-glass);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border: 1px solid var(--border-glass);
+                border-radius: var(--radius);
+                transition: background .3s, border-color .3s, transform .3s;
+            }
+
+            .glass-hover:hover {
+                background: var(--bg-glass-hover);
+                border-color: var(--border-glass-hover);
+                transform: translateY(-2px);
+            }
+
+            /* ── Glass card with inner glow micro-interaction ── */
+            .glass-card {
+                position: relative;
+                background: var(--bg-glass);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border: 1px solid var(--border-glass);
+                border-radius: var(--radius);
+                overflow: hidden;
+                transition: background .4s, border-color .4s, transform .4s cubic-bezier(.22,1,.36,1);
+                isolation: isolate;
+            }
+
+            .glass-card::before {
+                content: '';
+                position: absolute;
+                inset: -50%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(circle at 50% 50%, var(--accent-glow) 0%, transparent 50%);
+                opacity: 0;
+                transition: opacity .5s ease;
+                pointer-events: none;
+                z-index: -1;
+                transform: translate(0, 0);
+            }
+
+            .glass-card:hover {
+                background: var(--bg-glass-hover);
+                border-color: var(--border-glass-hover);
+                transform: translateY(-3px);
+            }
+
+            .glass-card:hover::before {
+                opacity: 1;
+            }
+
+            /* ── Nav ── */
+            .nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                background: rgba(7,11,26,0.6);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-bottom: 1px solid var(--border-glass);
+                height: var(--nav-height);
+                display: flex;
+                align-items: center;
+            }
+
+            .nav-inner {
+                width: 100%;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 var(--space-lg);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .nav-brand {
+                font-size: 1.05rem;
+                font-weight: 700;
+                letter-spacing: -0.02em;
+                color: var(--text-primary);
+            }
+
+            .nav-brand span {
+                background: linear-gradient(135deg, var(--accent), #818cf8);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .nav-tag {
+                font-size: .75rem;
+                color: var(--text-secondary);
+                background: rgba(255,255,255,0.04);
+                padding: 6px 16px;
+                border-radius: 20px;
+                border: 1px solid var(--border-glass);
+                font-weight: 500;
+                letter-spacing: .02em;
+            }
+
+            /* ── Container ── */
+            .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-lg); }
+
+            /* ── Sections ── */
+            section { padding: var(--space-2xl) 0; }
+
+            /* ── Hero ── */
+            .hero {
+                padding: calc(var(--nav-height) + var(--space-2xl)) 0 var(--space-xl);
+                min-height: 90vh;
+                display: flex;
+                align-items: center;
+            }
+
+            .hero-content {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-xl);
+                align-items: center;
+            }
+
+            .hero-text {
+                position: relative;
+            }
+
+            .hero-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                background: rgba(45,212,191,0.08);
+                border: 1px solid rgba(45,212,191,0.15);
+                color: var(--accent);
+                font-size: .75rem;
+                font-weight: 600;
+                padding: 6px 16px;
+                border-radius: 20px;
+                margin-bottom: var(--space-lg);
+                letter-spacing: .03em;
+                text-transform: uppercase;
+            }
+
+            .hero-badge::before {
+                content: '';
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: var(--accent);
+                animation: pulse-dot 2s ease-in-out infinite;
+            }
+
+            @keyframes pulse-dot {
+                0%, 100% { opacity: 1; }
+                50% { opacity: .3; }
+            }
+
+            .hero h1 {
+                font-size: clamp(2.8rem, 6vw, 4.5rem);
+                font-weight: 800;
+                letter-spacing: -0.03em;
+                line-height: 1.05;
+                margin-bottom: var(--space-md);
+                color: var(--text-primary);
+            }
+
+            .hero h1 .gradient-text {
+                background: linear-gradient(135deg, var(--accent) 0%, #818cf8 40%, #a78bfa 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .hero p {
+                color: var(--text-secondary);
+                font-size: 1.1rem;
+                max-width: 480px;
+                line-height: 1.7;
+                margin-bottom: var(--space-lg);
+            }
+
+            .hero-actions {
+                display: flex;
+                gap: var(--space-md);
+                align-items: center;
+            }
+
+            .btn-primary {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                background: var(--accent);
+                color: #070b1a;
+                font-weight: 700;
+                font-size: .95rem;
+                padding: 14px 32px;
+                border-radius: var(--radius-sm);
+                border: none;
+                transition: transform .2s, box-shadow .2s;
+                letter-spacing: -0.01em;
+            }
+
+            .btn-primary:hover {
+                transform: translateY(-1px);
+                box-shadow: 0 8px 32px rgba(45,212,191,0.25);
+            }
+
+            .hero-sub {
+                font-size: .85rem;
+                color: var(--text-muted);
+            }
+
+            /* ── Hero visual (right side) ── */
+            .hero-visual {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                aspect-ratio: 1;
+                max-width: 480px;
+                margin-left: auto;
+            }
+
+            .hero-visual-inner {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .hero-ring {
+                position: absolute;
+                border-radius: 50%;
+                border: 1px solid var(--border-glass);
+                animation: ringPulse 8s ease-in-out infinite;
+            }
+
+            .hero-ring:nth-child(1) {
+                width: 60%;
+                height: 60%;
+                animation-delay: 0s;
+                background: radial-gradient(circle, rgba(45,212,191,0.04) 0%, transparent 70%);
+            }
+
+            .hero-ring:nth-child(2) {
+                width: 80%;
+                height: 80%;
+                animation-delay: -2s;
+                border-color: rgba(45,212,191,0.1);
+                background: radial-gradient(circle, rgba(99,102,241,0.03) 0%, transparent 70%);
+            }
+
+            .hero-ring:nth-child(3) {
+                width: 95%;
+                height: 95%;
+                animation-delay: -4s;
+                border-color: rgba(139,92,246,0.08);
+                background: radial-gradient(circle, rgba(139,92,246,0.02) 0%, transparent 70%);
+            }
+
+            .hero-glow-center {
+                width: 40%;
+                height: 40%;
+                border-radius: 50%;
+                background: radial-gradient(circle, rgba(45,212,191,0.15) 0%, transparent 70%);
+                animation: glowCenter 4s ease-in-out infinite alternate;
+            }
+
+            @keyframes ringPulse {
+                0%, 100% { transform: scale(1); opacity: .5; }
+                50% { transform: scale(1.03); opacity: .8; }
+            }
+
+            @keyframes glowCenter {
+                0% { transform: scale(1); opacity: .6; }
+                100% { transform: scale(1.15); opacity: 1; }
+            }
+
+            @keyframes fadeUp {
+                from { opacity: 0; transform: translateY(24px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            /* ── Stats ── */
+            .stats-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: var(--space-md);
+            }
+
+            .stat-card {
+                padding: var(--space-lg) var(--space-md);
+                text-align: center;
+                border-radius: var(--radius);
+                background: var(--bg-glass);
+                backdrop-filter: blur(12px);
+                border: 1px solid var(--border-glass);
+            }
+
+            .stat-number {
+                font-size: 2rem;
+                font-weight: 800;
+                letter-spacing: -0.02em;
+                background: linear-gradient(135deg, var(--text-primary), var(--accent));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                line-height: 1.2;
+            }
+
+            .stat-label {
+                font-size: .8rem;
+                color: var(--text-muted);
+                margin-top: var(--space-xs);
+                font-weight: 500;
+            }
+
+            /* ── Section titles ── */
+            .section-label {
+                font-size: .7rem;
+                font-weight: 600;
+                color: var(--text-muted);
+                text-transform: uppercase;
+                letter-spacing: .08em;
+                margin-bottom: var(--space-md);
+            }
+
+            .section-title {
+                font-size: clamp(1.5rem, 3vw, 2rem);
+                font-weight: 700;
+                letter-spacing: -0.02em;
+                color: var(--text-primary);
+                margin-bottom: var(--space-md);
+            }
+
+            .section-sub {
+                color: var(--text-secondary);
+                font-size: 1rem;
+                max-width: 500px;
+                line-height: 1.7;
+                margin-bottom: var(--space-xl);
+            }
+
+            /* ── How it works: asymmetric grid ── */
+            .steps-grid {
+                display: grid;
+                grid-template-columns: 1.2fr 0.8fr 1fr;
+                gap: var(--space-md);
+                align-items: start;
+            }
+
+            .step-card {
+                padding: var(--space-lg);
+            }
+
+            .step-card:nth-child(2) {
+                margin-top: var(--space-lg);
+            }
+
+            .step-card:nth-child(3) {
+                margin-top: var(--space-md);
+            }
+
+            .step-number {
+                font-size: .7rem;
+                font-weight: 700;
+                color: var(--accent);
+                text-transform: uppercase;
+                letter-spacing: .06em;
+                margin-bottom: var(--space-sm);
+            }
+
+            .step-card h3 {
+                font-size: 1.05rem;
+                font-weight: 600;
+                margin-bottom: var(--space-sm);
+                letter-spacing: -0.01em;
+            }
+
+            .step-card p {
+                font-size: .85rem;
+                color: var(--text-secondary);
+                line-height: 1.6;
+            }
+
+            /* ── Checks: asymmetric staggered grid ── */
+            .checks-grid {
+                display: grid;
+                grid-template-columns: 2fr 1fr 2fr;
+                gap: var(--space-md);
+                grid-auto-rows: auto;
+            }
+
+            .checks-grid .glass-card {
+                padding: var(--space-lg);
+            }
+
+            .checks-grid .glass-card:nth-child(1) { grid-column: 1 / 2; }
+            .checks-grid .glass-card:nth-child(2) { grid-column: 2 / 4; }
+            .checks-grid .glass-card:nth-child(3) { grid-column: 1 / 3; margin-top: -20px; }
+            .checks-grid .glass-card:nth-child(4) { grid-column: 3 / 4; margin-top: -20px; }
+            .checks-grid .glass-card:nth-child(5) { grid-column: 1 / 2; margin-top: -40px; }
+            .checks-grid .glass-card:nth-child(6) { grid-column: 2 / 4; margin-top: -40px; }
+
+            .check-card h4 {
+                font-size: .85rem;
+                font-weight: 600;
+                color: var(--accent);
+                margin-bottom: var(--space-sm);
+                letter-spacing: -0.01em;
+            }
+
+            .check-card p {
+                font-size: .82rem;
+                color: var(--text-secondary);
+                line-height: 1.6;
+            }
+
+            /* ── Form ── */
+            .form-section {
+                padding: var(--space-2xl) 0;
+            }
+
+            .form-wrap {
+                max-width: 640px;
+                margin: 0 auto;
+                padding: var(--space-xl);
+                background: var(--bg-glass);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border: 1px solid var(--border-glass);
+                border-radius: var(--radius);
+            }
+
+            .form-wrap h2 {
+                font-size: 1.25rem;
+                font-weight: 700;
+                letter-spacing: -0.01em;
+                margin-bottom: var(--space-xs);
+            }
+
+            .form-wrap .sub {
+                color: var(--text-secondary);
+                font-size: .875rem;
+                margin-bottom: var(--space-lg);
+            }
+
+            .form-group {
+                margin-bottom: var(--space-md);
+            }
+
+            .form-group label {
+                display: block;
+                font-size: .8rem;
+                font-weight: 500;
+                color: var(--text-secondary);
+                margin-bottom: 6px;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                width: 100%;
+                padding: 12px 16px;
+                border-radius: var(--radius-sm);
+                border: 1px solid var(--border-glass);
+                background: rgba(255,255,255,0.03);
+                color: var(--text-primary);
+                font-size: .9rem;
+                font-family: var(--font);
+                outline: none;
+                transition: border .2s, background .2s, box-shadow .2s;
+            }
+
+            .form-group input:focus,
+            .form-group textarea:focus {
+                border-color: rgba(45,212,191,0.3);
+                background: rgba(255,255,255,0.05);
+                box-shadow: 0 0 0 3px rgba(45,212,191,0.06);
+            }
+
+            .form-group textarea {
+                resize: vertical;
+                min-height: 80px;
+            }
+
+            .form-group .field-error {
+                font-size: .75rem;
+                color: var(--error);
+                margin-top: 4px;
+                display: block;
+                min-height: 0;
+            }
+
+            .form-error-msg,
+            .form-success-msg {
+                display: none;
+                padding: 12px 16px;
+                border-radius: var(--radius-sm);
+                margin-bottom: var(--space-md);
+                font-size: .875rem;
+            }
+
+            .form-success-msg {
+                background: rgba(52,211,153,0.08);
+                border: 1px solid rgba(52,211,153,0.2);
+                color: var(--success);
+            }
+
+            .form-error-msg {
+                background: rgba(248,113,113,0.08);
+                border: 1px solid rgba(248,113,113,0.2);
+                color: var(--error);
+            }
+
+            .btn-submit {
+                width: 100%;
+                background: var(--accent);
+                color: #070b1a;
+                border: none;
+                padding: 14px 24px;
+                border-radius: var(--radius-sm);
+                font-weight: 700;
+                font-size: .95rem;
+                font-family: var(--font);
+                transition: transform .2s, box-shadow .2s, opacity .2s;
+                letter-spacing: -0.01em;
+            }
+
+            .btn-submit:hover {
+                transform: translateY(-1px);
+                box-shadow: 0 8px 32px rgba(45,212,191,0.2);
+            }
+
+            .btn-submit:disabled {
+                opacity: .4;
+                cursor: not-allowed;
+                transform: none;
+                box-shadow: none;
+            }
+
+            .btn-submit .spinner {
+                display: inline-block;
+                width: 14px;
+                height: 14px;
+                border: 2px solid rgba(7,11,26,0.2);
+                border-top-color: #070b1a;
+                border-radius: 50%;
+                animation: spin .6s linear infinite;
+                vertical-align: middle;
+                margin-right: 6px;
+            }
+
+            @keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+
+            /* ── Footer ── */
+            footer {
+                padding: var(--space-xl) 0;
+                border-top: 1px solid var(--border-glass);
+                text-align: center;
+            }
+
+            footer p {
+                font-size: .8rem;
+                color: var(--text-muted);
+            }
+
+            footer a {
+                color: var(--accent);
+                transition: opacity .2s;
+            }
+
+            footer a:hover {
+                opacity: .7;
+            }
+
+            /* ── Reveal animations ── */
+            .reveal {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity .6s ease, transform .6s ease;
+            }
+
+            .reveal.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .reveal-delay-1 { transition-delay: 0s; }
+            .reveal-delay-2 { transition-delay: .1s; }
+            .reveal-delay-3 { transition-delay: .2s; }
+            .reveal-delay-4 { transition-delay: .3s; }
         }
 
-        /* How it works */
-        .how-it-works {
-            padding: 48px 0;
-            border-top: 1px solid #e2e8f0;
-        }
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-        }
-        .step {
-            position: relative;
-            padding-left: 28px;
-        }
-        .step::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 4px;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: #eef2ff;
-            border: 2px solid #6366f1;
-        }
-        .step h3 {
-            font-size: .9rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-            color: #0f172a;
-        }
-        .step p {
-            font-size: .85rem;
-            color: #64748b;
+        @layer utilities {
+            .flex-center { display: flex; align-items: center; justify-content: center; }
+            .gap-sm { gap: var(--space-sm); }
+            .gap-md { gap: var(--space-md); }
+            .gap-lg { gap: var(--space-lg); }
+            .mb-md { margin-bottom: var(--space-md); }
+            .mb-lg { margin-bottom: var(--space-lg); }
         }
 
-        /* What We Check */
-        .checks {
-            padding: 48px 0;
-            border-top: 1px solid #e2e8f0;
-        }
-        .check-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-        .check-item {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            padding: 20px;
-        }
-        .check-item h4 {
-            font-size: .85rem;
-            font-weight: 600;
-            color: #0f172a;
-            margin-bottom: 4px;
-        }
-        .check-item p {
-            font-size: .8rem;
-            color: #64748b;
-            line-height: 1.5;
+        @layer animations {
+            /* scroll-driven animation support — graceful degradation */
+            @supports (animation-timeline: scroll()) {
+                .hero-title-anim {
+                    animation: heroReveal linear forwards;
+                    animation-timeline: scroll();
+                    animation-range: entry 0% entry 50%;
+                }
+
+                @keyframes heroReveal {
+                    from {
+                        clip-path: inset(0 0 0 0);
+                        opacity: 1;
+                    }
+                    to {
+                        clip-path: inset(30% 0 0 0);
+                        opacity: .3;
+                    }
+                }
+            }
         }
 
-        /* Form */
-        .form-section {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 40px;
-            margin: 48px 0;
-        }
-        .form-section h2 {
-            font-size: 1.15rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-            color: #0f172a;
-        }
-        .form-section .sub {
-            color: #64748b;
-            font-size: .875rem;
-            margin-bottom: 24px;
-        }
-        .form-group { margin-bottom: 16px; }
-        .form-group label {
-            display: block;
-            font-size: .8rem;
-            font-weight: 500;
-            margin-bottom: 6px;
-            color: #475569;
-        }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 10px 14px;
-            border-radius: 6px;
-            border: 1px solid #e2e8f0;
-            background: #f8fafc;
-            color: #1e293b;
-            font-size: .9rem;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-            transition: border .15s, box-shadow .15s;
-        }
-        .form-group input:focus, .form-group textarea:focus {
-            border-color: #6366f1;
-            box-shadow: 0 0 0 3px rgba(99,102,241,.1);
-        }
-        .form-group textarea {
-            resize: vertical;
-            min-height: 70px;
-        }
-        .btn-primary {
-            background: #0f172a;
-            color: #fff;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-weight: 500;
-            font-size: .9rem;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            width: 100%;
-            transition: background .2s;
-        }
-        .btn-primary:hover { background: #1e293b; }
-        .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
-        #form-status, .fs-error-msg {
-            margin-top: 12px;
-            font-size: .85rem;
-            min-height: 24px;
-        }
-        #form-status.success, .fs-success-msg { color: #059669; }
-        #form-status.error, .fs-error-msg { color: #dc2626; }
-        .fs-error-msg.field-error { font-size: .75rem; margin-top: 4px; min-height: 0; }
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
 
-        /* Stats row */
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            padding: 32px 0;
-            border-top: 1px solid #e2e8f0;
-            text-align: center;
-        }
-        .stat-num { font-size: 1.5rem; font-weight: 700; color: #0f172a; }
-        .stat-label { font-size: .8rem; color: #64748b; margin-top: 2px; }
+            .hero p {
+                max-width: none;
+            }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            border-top: 1px solid #e2e8f0;
-            color: #94a3b8;
-            font-size: .8rem;
-        }
-        footer a { color: #6366f1; text-decoration: none; }
+            .hero-actions {
+                justify-content: center;
+            }
 
-        .spinner {
-            display: inline-block;
-            width: 14px;
-            height: 14px;
-            border: 2px solid rgba(255,255,255,.3);
-            border-top-color: #fff;
-            border-radius: 50%;
-            animation: spin .6s linear infinite;
-            vertical-align: middle;
-            margin-right: 6px;
+            .hero-visual {
+                display: none;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .step-card:nth-child(2),
+            .step-card:nth-child(3) {
+                margin-top: 0;
+            }
+
+            .checks-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .checks-grid .glass-card:nth-child(1),
+            .checks-grid .glass-card:nth-child(2),
+            .checks-grid .glass-card:nth-child(3),
+            .checks-grid .glass-card:nth-child(4),
+            .checks-grid .glass-card:nth-child(5),
+            .checks-grid .glass-card:nth-child(6) {
+                grid-column: auto;
+                margin-top: 0;
+            }
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
 
         @media (max-width: 600px) {
-            .hero h1 { font-size: 1.75rem; }
-            .steps { grid-template-columns: 1fr; gap: 20px; }
-            .check-grid { grid-template-columns: 1fr; }
-            .stats-row { gap: 12px; }
-            .form-section { padding: 24px; }
+            :root {
+                --space-lg: 24px;
+                --space-xl: 36px;
+                --space-2xl: 56px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .checks-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <nav class="nav">
+    <div class="bg-grid"></div>
+
+    <!-- ── Nav ── -->
+    <nav class="nav">
+        <div class="nav-inner">
             <div class="nav-brand">DS <span>Studios</span></div>
             <span class="nav-tag">Site Reports</span>
-        </nav>
-
-        <section class="hero">
-            <div class="hero-badge">Free Website Audit</div>
-            <h1>Your site, <span>analysed.</span></h1>
-            <p>A thorough, independent review of your website across SEO, performance, mobile readiness, design, and content. Delivered to your inbox.</p>
-            <div class="cta-row">
-                <a href="#audit-form" class="cta">Get your free report</a>
-                <span class="cta-sub">Takes 30 seconds</span>
-            </div>
-        </section>
-
-        <div class="stats-row">
-            <div><div class="stat-num">10+</div><div class="stat-label">Years in hospitality web</div></div>
-            <div><div class="stat-num">200+</div><div class="stat-label">Irish sites audited</div></div>
-            <div><div class="stat-num">100%</div><div class="stat-label">Free, always</div></div>
         </div>
+    </nav>
 
-        <section class="how-it-works">
+    <!-- ── Hero ── -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge">Free Website Audit</div>
+                    <h1>
+                        Your site.<br>
+                        <span class="gradient-text">Analysed.</span>
+                    </h1>
+                    <p>SEO, performance, mobile, design, content. A comprehensive review of your website delivered to your inbox. Independent, honest, actionable.</p>
+                    <div class="hero-actions">
+                        <a href="#audit-form" class="btn-primary">
+                            Get your free report
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
+                        <span class="hero-sub">30 seconds | No credit card</span>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-visual-inner">
+                        <div class="hero-ring"></div>
+                        <div class="hero-ring"></div>
+                        <div class="hero-ring"></div>
+                        <div class="hero-glow-center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Stats ── -->
+    <section>
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card reveal reveal-delay-1">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Years in hospitality web</div>
+                </div>
+                <div class="stat-card reveal reveal-delay-2">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">Irish sites audited</div>
+                </div>
+                <div class="stat-card reveal reveal-delay-3">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Free, always</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── How it works ── -->
+    <section>
+        <div class="container">
+            <div class="section-label">Process</div>
             <h2 class="section-title">How it works</h2>
-            <div class="steps">
-                <div class="step">
+            <p class="section-sub">Three steps from URL to actionable insights. No signup, no hidden costs.</p>
+            <div class="steps-grid">
+                <div class="step-card glass-card reveal">
+                    <div class="step-number">Step 01</div>
                     <h3>Submit your URL</h3>
-                    <p>Tell us what site to look at. Name and email for delivery.</p>
+                    <p>Tell us what site to audit. Your name and email for delivery.</p>
                 </div>
-                <div class="step">
+                <div class="step-card glass-card reveal">
+                    <div class="step-number">Step 02</div>
                     <h3>We analyse it</h3>
-                    <p>Full crawl across five categories, dozens of checks.</p>
+                    <p>Full crawl across five categories. Dozens of individual checks per category.</p>
                 </div>
-                <div class="step">
+                <div class="step-card glass-card reveal">
+                    <div class="step-number">Step 03</div>
                     <h3>Report arrives</h3>
-                    <p>Detailed findings and prioritised fixes in your inbox.</p>
+                    <p>Detailed findings and prioritised fixes land in your inbox.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="checks">
+    <!-- ── What we check ── -->
+    <section>
+        <div class="container">
+            <div class="section-label">Categories</div>
             <h2 class="section-title">What we check</h2>
-            <div class="check-grid">
-                <div class="check-item">
+            <p class="section-sub">Every audit covers these six areas. You get a score and specific fixes for each.</p>
+            <div class="checks-grid">
+                <div class="glass-card check-card reveal">
                     <h4>SEO</h4>
-                    <p>Title tags, meta descriptions, headings, canonical URLs, Open Graph.</p>
+                    <p>Title tags, meta descriptions, headings, canonical URLs, Open Graph, structured data.</p>
                 </div>
-                <div class="check-item">
+                <div class="glass-card check-card reveal">
                     <h4>Performance</h4>
-                    <p>Page weight, script count, image use, compression, caching.</p>
+                    <p>Page weight, script count, image optimisation, compression, caching headers, render blocking.</p>
                 </div>
-                <div class="check-item">
+                <div class="glass-card check-card reveal">
                     <h4>Mobile</h4>
-                    <p>Viewport configuration, responsive CSS, mobile usability.</p>
+                    <p>Viewport configuration, responsive CSS, touch targets, mobile usability violations.</p>
                 </div>
-                <div class="check-item">
+                <div class="glass-card check-card reveal">
                     <h4>Design</h4>
-                    <p>Code quality, favicon, inline styles, estimated vintage.</p>
+                    <p>Code quality, favicon presence, inline style usage, framework detection, estimated vintage.</p>
                 </div>
-                <div class="check-item">
+                <div class="glass-card check-card reveal">
                     <h4>Content</h4>
-                    <p>Word count, link health, contact presence, engagement signals.</p>
+                    <p>Word count, link health, contact information presence, engagement signals, readability.</p>
                 </div>
-                <div class="check-item">
+                <div class="glass-card check-card reveal">
                     <h4>Priorities</h4>
-                    <p>Clear, ranked recommendations — know exactly what to fix first.</p>
+                    <p>Clear ranked recommendations. Know exactly what to fix first for maximum impact.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="form-section" id="audit-form">
-            <h2>Request your report</h2>
-            <p class="sub">Enter your details and we'll send a comprehensive audit to your inbox.</p>
-            <form id="auditForm">
-                <div data-fs-success class="fs-success-msg" style="display:none;padding:12px 16px;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:6px;margin-bottom:20px;">
-                    Got it — we’ll send your report shortly.
-                </div>
-                <div data-fs-error class="fs-error-msg" style="display:none;padding:12px 16px;background:#fef2f2;border:1px solid #fecaca;border-radius:6px;margin-bottom:20px;"></div>
-                <div class="form-group">
-                    <label for="name">Your name</label>
-                    <input type="text" id="name" name="name" required placeholder="e.g. John Smith" data-fs-field>
-                    <span data-fs-error="name" class="fs-error-msg field-error"></span>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" id="email" name="email" required placeholder="you@example.com" data-fs-field>
-                    <span data-fs-error="email" class="fs-error-msg field-error"></span>
-                </div>
-                <div class="form-group">
-                    <label for="website">Website URL</label>
-                    <input type="url" id="website" name="website" required placeholder="https://yourhotel.com" data-fs-field>
-                    <span data-fs-error="website" class="fs-error-msg field-error"></span>
-                </div>
-                <div class="form-group">
-                    <label for="notes">Anything specific to look at? <span style="color:#94a3b8;font-weight:400;">(optional)</span></label>
-                    <textarea id="notes" name="notes" placeholder="e.g. We've had complaints about slow mobile load times" data-fs-field></textarea>
-                    <span data-fs-error="notes" class="fs-error-msg field-error"></span>
-                </div>
-                <button type="submit" class="btn-primary" id="submitBtn" data-fs-submit-btn>Send my free report</button>
-                <div id="form-status"></div>
-            </form>
-        </section>
-    </div>
+    <!-- ── Form ── -->
+    <section class="form-section" id="audit-form">
+        <div class="container">
+            <div class="form-wrap">
+                <h2>Request your report</h2>
+                <p class="sub">Enter your details and we'll send a comprehensive audit to your inbox.</p>
+                <form id="auditForm">
+                    <div class="form-success-msg" data-fs-success>
+                        Got it — we'll send your report shortly.
+                    </div>
+                    <div class="form-error-msg" data-fs-error></div>
+                    <div class="form-group">
+                        <label for="name">Your name</label>
+                        <input type="text" id="name" name="name" required placeholder="e.g. John Smith" data-fs-field>
+                        <span data-fs-error="name" class="field-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" id="email" name="email" required placeholder="you@example.com" data-fs-field>
+                        <span data-fs-error="email" class="field-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="website">Website URL</label>
+                        <input type="url" id="website" name="website" required placeholder="https://yourhotel.com" data-fs-field>
+                        <span data-fs-error="website" class="field-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Anything specific to look at? <span style="color: var(--text-muted); font-weight: 400;">(optional)</span></label>
+                        <textarea id="notes" name="notes" placeholder="e.g. We've had complaints about slow mobile load times" data-fs-field></textarea>
+                        <span data-fs-error="notes" class="field-error"></span>
+                    </div>
+                    <button type="submit" class="btn-submit" data-fs-submit-btn>
+                        Send my free report
+                    </button>
+                    <div id="form-status" data-fs-error></div>
+                </form>
+            </div>
+        </div>
+    </section>
 
+    <!-- ── Footer ── -->
     <footer>
         <div class="container">
-            <p><a href="https://sitescorereports.info">Site Reports</a> by DS Studios &mdash; Website audits for Irish hospitality businesses.</p>
+            <p>Site Reports by <a href="https://dsstudios.ie">DS Studios</a> | Website audits for Irish businesses</p>
         </div>
     </footer>
 
     <script>
+        // ── Scroll reveal via IntersectionObserver ──
+        (function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        })();
+
+        // ── Formspree init ──
         window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
         formspree('initForm', { formElement: '#auditForm', formId: 'xvzykdlr' });
+
+        // ── Custom submit button text toggle ──
+        document.addEventListener('fs_submitting', function(e) {
+            if (e.detail && e.detail.formElement === '#auditForm') {
+                const btn = document.querySelector('#auditForm [data-fs-submit-btn]');
+                if (btn) {
+                    btn.innerHTML = '<span class="spinner"></span> Sending';
+                    btn.disabled = true;
+                }
+            }
+        });
+        document.addEventListener('fs_submitted', function(e) {
+            const btn = document.querySelector('#auditForm [data-fs-submit-btn]');
+            if (btn) {
+                btn.innerHTML = 'Send my free report';
+                btn.disabled = false;
+            }
+        });
     </script>
     <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
