@@ -233,13 +233,14 @@
         }
         .btn-primary:hover { background: #1e293b; }
         .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
-        #form-status {
+        #form-status, .fs-error-msg {
             margin-top: 12px;
             font-size: .85rem;
             min-height: 24px;
         }
-        #form-status.success { color: #059669; }
-        #form-status.error { color: #dc2626; }
+        #form-status.success, .fs-success-msg { color: #059669; }
+        #form-status.error, .fs-error-msg { color: #dc2626; }
+        .fs-error-msg.field-error { font-size: .75rem; margin-top: 4px; min-height: 0; }
 
         /* Stats row */
         .stats-row {
@@ -360,23 +361,31 @@
             <h2>Request your report</h2>
             <p class="sub">Enter your details and we'll send a comprehensive audit to your inbox.</p>
             <form id="auditForm">
+                <div data-fs-success class="fs-success-msg" style="display:none;padding:12px 16px;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:6px;margin-bottom:20px;">
+                    Got it — we’ll send your report shortly.
+                </div>
+                <div data-fs-error class="fs-error-msg" style="display:none;padding:12px 16px;background:#fef2f2;border:1px solid #fecaca;border-radius:6px;margin-bottom:20px;"></div>
                 <div class="form-group">
                     <label for="name">Your name</label>
-                    <input type="text" id="name" name="name" required placeholder="e.g. John Smith">
+                    <input type="text" id="name" name="name" required placeholder="e.g. John Smith" data-fs-field>
+                    <span data-fs-error="name" class="fs-error-msg field-error"></span>
                 </div>
                 <div class="form-group">
                     <label for="email">Email address</label>
-                    <input type="email" id="email" name="email" required placeholder="you@example.com">
+                    <input type="email" id="email" name="email" required placeholder="you@example.com" data-fs-field>
+                    <span data-fs-error="email" class="fs-error-msg field-error"></span>
                 </div>
                 <div class="form-group">
                     <label for="website">Website URL</label>
-                    <input type="url" id="website" name="website" required placeholder="https://yourhotel.com">
+                    <input type="url" id="website" name="website" required placeholder="https://yourhotel.com" data-fs-field>
+                    <span data-fs-error="website" class="fs-error-msg field-error"></span>
                 </div>
                 <div class="form-group">
                     <label for="notes">Anything specific to look at? <span style="color:#94a3b8;font-weight:400;">(optional)</span></label>
-                    <textarea id="notes" name="notes" placeholder="e.g. We've had complaints about slow mobile load times"></textarea>
+                    <textarea id="notes" name="notes" placeholder="e.g. We've had complaints about slow mobile load times" data-fs-field></textarea>
+                    <span data-fs-error="notes" class="fs-error-msg field-error"></span>
                 </div>
-                <button type="submit" class="btn-primary" id="submitBtn">Send my free report</button>
+                <button type="submit" class="btn-primary" id="submitBtn" data-fs-submit-btn>Send my free report</button>
                 <div id="form-status"></div>
             </form>
         </section>
@@ -389,46 +398,9 @@
     </footer>
 
     <script>
-        document.getElementById('auditForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            const status = document.getElementById('form-status');
-            const data = {
-                name: document.getElementById('name').value.trim(),
-                email: document.getElementById('email').value.trim(),
-                website: document.getElementById('website').value.trim(),
-                notes: document.getElementById('notes').value.trim()
-            };
-
-            btn.disabled = true;
-            btn.innerHTML = '<span class="spinner"></span> Sending...';
-            status.className = '';
-            status.textContent = '';
-
-            let queue = JSON.parse(localStorage.getItem('audit_queue') || '[]');
-            queue.push({ ...data, timestamp: new Date().toISOString() });
-            localStorage.setItem('audit_queue', JSON.stringify(queue));
-
-            try {
-                const target = localStorage.getItem('api_endpoint') || 'https://experience-modems-safer-coaching.trycloudflare.com';
-                const res = await fetch(target + '/api/audit', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                if (!res.ok) throw new Error('Server error');
-                status.className = 'success';
-                status.textContent = 'Got it — we\'ll send your report shortly.';
-                this.reset();
-            } catch (err) {
-                status.className = 'success';
-                status.textContent = 'Thanks — we\'ve queued your request.';
-                this.reset();
-            } finally {
-                btn.disabled = false;
-                btn.textContent = 'Send my free report';
-            }
-        });
+        window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+        formspree('initForm', { formElement: '#auditForm', formId: 'xvzykdlr' });
     </script>
+    <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>
