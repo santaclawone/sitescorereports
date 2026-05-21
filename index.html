@@ -1074,48 +1074,31 @@
     </section>
 
     <!-- ── Process ── -->
-    <section class="process-section">
+    <section>
         <div class="container">
             <div class="section-label">Process</div>
-            <h2 class="section-title">See it in motion</h2>
-            <p class="section-sub">Not a flowchart. A live demonstration of what happens when you submit your URL.</p>
-            <div class="process-grid">
-                <div class="process-visual" id="processVisual">
-                    <div class="process-canvas">
-                        <svg viewBox="0 0 280 280">
-                            <circle class="pc-ring" cx="140" cy="140" r="120"/>
-                            <circle class="pc-arc" id="arc1" cx="140" cy="140" r="120" stroke-dasharray="188.5" stroke-dashoffset="188.5" transform="rotate(-90 140 140)"/>
-                            <circle class="pc-arc" id="arc2" cx="140" cy="140" r="120" stroke-dasharray="188.5" stroke-dashoffset="188.5" transform="rotate(0 140 140)"/>
-                            <circle class="pc-arc" id="arc3" cx="140" cy="140" r="120" stroke-dasharray="188.5" stroke-dashoffset="188.5" transform="rotate(90 140 140)"/>
-                            <circle class="pc-arc" id="arc4" cx="140" cy="140" r="120" stroke-dasharray="188.5" stroke-dashoffset="188.5" transform="rotate(180 140 140)"/>
-                        </svg>
-                        <svg class="process-icon icon-submit" id="pIcon1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        <svg class="process-icon icon-crawl" id="pIcon2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v3l2 1"/></svg>
-                        <svg class="process-icon icon-score" id="pIcon3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                        <svg class="process-icon icon-deliver" id="pIcon4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg>
-                    </div>
+            <h2 class="section-title">How it works</h2>
+            <p class="section-sub">Four steps from URL submission to a complete audit in your inbox.</p>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+                <div class="glass-card" style="padding:24px;">
+                    <div style="font-size:.6rem;font-weight:700;color:var(--warm);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;">Step 01</div>
+                    <div style="font-size:.9rem;font-weight:600;color:var(--text-primary);margin-bottom:4px;">Submit your URL</div>
+                    <div style="font-size:.78rem;color:var(--text-secondary);line-height:1.5;">Enter your website address. Name and email for delivery.</div>
                 </div>
-                <div class="process-steps" id="processSteps">
-                    <div class="ps-card" data-step="0">
-                        <div class="ps-num">Step 01</div>
-                        <div class="ps-title">Submit your URL</div>
-                        <div class="ps-desc">Enter your website address. Our crawler receives the request and prepares a comprehensive scan.</div>
-                    </div>
-                    <div class="ps-card" data-step="1">
-                        <div class="ps-num">Step 02</div>
-                        <div class="ps-title">Full crawl</div>
-                        <div class="ps-desc">Every page is scanned across security, SEO, performance, mobile, design, and content. Dozens of checks per page.</div>
-                    </div>
-                    <div class="ps-card" data-step="2">
-                        <div class="ps-num">Step 03</div>
-                        <div class="ps-title">Scores generated</div>
-                        <div class="ps-desc">Results are analysed and scored. Issues are prioritised by severity and grouped into actionable recommendations.</div>
-                    </div>
-                    <div class="ps-card" data-step="3">
-                        <div class="ps-num">Step 04</div>
-                        <div class="ps-title">Report delivered</div>
-                        <div class="ps-desc">A full audit lands in your inbox. Every finding, every score, every fix — ready to act on.</div>
-                    </div>
+                <div class="glass-card" style="padding:24px;">
+                    <div style="font-size:.6rem;font-weight:700;color:var(--warm);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;">Step 02</div>
+                    <div style="font-size:.9rem;font-weight:600;color:var(--text-primary);margin-bottom:4px;">Full crawl</div>
+                    <div style="font-size:.78rem;color:var(--text-secondary);line-height:1.5;">Every page scanned across six categories. Dozens of checks per page.</div>
+                </div>
+                <div class="glass-card" style="padding:24px;">
+                    <div style="font-size:.6rem;font-weight:700;color:var(--warm);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;">Step 03</div>
+                    <div style="font-size:.9rem;font-weight:600;color:var(--text-primary);margin-bottom:4px;">Scores generated</div>
+                    <div style="font-size:.78rem;color:var(--text-secondary);line-height:1.5;">Results analysed, scored, and prioritised by severity.</div>
+                </div>
+                <div class="glass-card" style="padding:24px;">
+                    <div style="font-size:.6rem;font-weight:700;color:var(--warm);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;">Step 04</div>
+                    <div style="font-size:.9rem;font-weight:600;color:var(--text-primary);margin-bottom:4px;">Report delivered</div>
+                    <div style="font-size:.78rem;color:var(--text-secondary);line-height:1.5;">Full audit lands in your inbox. Every finding and fix ready to act on.</div>
                 </div>
             </div>
         </div>
@@ -1299,54 +1282,6 @@
     <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
     <script>
-        // ── Process visualization scroll sync ──
-        (function() {
-            var steps = document.querySelectorAll('.ps-card');
-            var arcs = [
-                document.getElementById('arc1'),
-                document.getElementById('arc2'),
-                document.getElementById('arc3'),
-                document.getElementById('arc4')
-            ];
-            var icons = [
-                document.getElementById('pIcon1'),
-                document.getElementById('pIcon2'),
-                document.getElementById('pIcon3'),
-                document.getElementById('pIcon4')
-            ];
-
-            if (!steps.length) return;
-
-            // Set initial state: first step active
-            steps[0].classList.add('active');
-            if (arcs[0]) arcs[0].classList.add('active');
-            if (icons[0]) icons[0].classList.add('active');
-
-            var observer = new IntersectionObserver(function(entries) {
-                var maxVisible = -1;
-                entries.forEach(function(entry) {
-                    var idx = parseInt(entry.target.dataset.step);
-                    if (entry.isIntersecting && idx > maxVisible) maxVisible = idx;
-                });
-
-                var activeIdx = maxVisible < 0 ? 0 : maxVisible;
-
-                steps.forEach(function(s, i) {
-                    s.classList.toggle('active', i <= activeIdx);
-                });
-
-                arcs.forEach(function(arc, i) {
-                    arc.classList.toggle('active', i <= activeIdx);
-                });
-
-                icons.forEach(function(icon, i) {
-                    if (icon) icon.classList.toggle('active', i <= activeIdx);
-                });
-            }, { threshold: 0.3 });
-
-            steps.forEach(function(s) { observer.observe(s); });
-        })();
-
         // ── Quick self-check ──
         (function() {
             var items = document.querySelectorAll('.qc-item');
