@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Website Audit Report — O'Brien's Hardware, Carlow — Site Reports</title>
+    <meta name="description" content="See exactly what you get: a real sample website audit report showing scores, issues, and recommendations for an Irish small business.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        @layer reset, base, components, utilities;
+
+        @layer reset {
+            *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+            html { scroll-behavior: smooth; }
+            body { min-height: 100vh; }
+            a { color: inherit; text-decoration: none; }
+            img { max-width: 100%; }
+        }
+
+        @layer base {
+            :root {
+                --bg-deep: #0a0e1a;
+                --bg-glass: rgba(255,255,255,0.04);
+                --bg-glass-hover: rgba(255,255,255,0.08);
+                --border-glass: rgba(255,255,255,0.06);
+                --border-glass-hover: rgba(255,255,255,0.12);
+                --accent: #c8a87c;
+                --accent-dim: rgba(200,168,124,0.2);
+                --accent-glow: rgba(200,168,124,0.06);
+                --teal: #2dd4bf;
+                --text-primary: #f1f5f9;
+                --text-secondary: #94a3b8;
+                --text-muted: #475569;
+                --success: #34d399;
+                --warning: #fbbf24;
+                --danger: #f87171;
+                --radius: 12px;
+                --radius-sm: 8px;
+                --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                --nav-height: 72px;
+            }
+
+            body {
+                font-family: var(--font);
+                background: var(--bg-deep);
+                color: var(--text-primary);
+                line-height: 1.6;
+                -webkit-font-smoothing: antialiased;
+            }
+
+            body::before {
+                content: '';
+                position: fixed;
+                inset: 0;
+                pointer-events: none;
+                z-index: -2;
+                background:
+                    radial-gradient(ellipse 70% 50% at 15% 10%, rgba(200,168,124,0.06) 0%, transparent 55%),
+                    radial-gradient(ellipse 50% 70% at 85% 80%, rgba(45,212,191,0.05) 0%, transparent 55%);
+                animation: orbDrift 35s ease-in-out infinite alternate;
+            }
+
+            body::after {
+                content: '';
+                position: fixed;
+                inset: 0;
+                pointer-events: none;
+                z-index: -1;
+                background-image:
+                    linear-gradient(rgba(255,255,255,0.008) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.008) 1px, transparent 1px);
+                background-size: 64px 64px;
+            }
+
+            @keyframes orbDrift {
+                0% { transform: translate(0,0) scale(1); }
+                100% { transform: translate(2%,-2%) scale(1.03); }
+            }
+        }
+
+        @layer components {
+            .nav {
+                position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+                background: rgba(10,14,26,0.6);
+                backdrop-filter: blur(20px);
+                border-bottom: 1px solid var(--border-glass);
+                height: var(--nav-height);
+                display: flex; align-items: center;
+            }
+            .nav-inner {
+                width: 100%; max-width: 900px; margin: 0 auto;
+                padding: 0 24px;
+                display: flex; align-items: center; justify-content: space-between;
+            }
+            .nav-brand { font-size: 1rem; font-weight: 700; color: var(--text-primary); }
+            .nav-brand span {
+                background: linear-gradient(135deg, var(--accent), var(--teal));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            .nav-back {
+                font-size: .8rem; color: var(--text-muted);
+                display: flex; align-items: center; gap: 6px;
+                transition: color .2s;
+            }
+            .nav-back:hover { color: var(--accent); }
+
+            .page-wrap {
+                padding: calc(var(--nav-height) + 32px) 0 64px;
+            }
+
+            .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+            /* ── Report card ── */
+            .report-card {
+                background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.02) 100%);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border: 1px solid var(--border-glass);
+                border-radius: var(--radius);
+                overflow: hidden;
+                position: relative;
+            }
+
+            .report-card::before {
+                content: '';
+                position: absolute;
+                top: 0; left: 0; right: 0;
+                height: 3px;
+                background: linear-gradient(90deg, var(--accent), var(--teal));
+            }
+
+            /* ── Report header ── */
+            .report-header {
+                padding: 40px 40px 32px;
+                border-bottom: 1px solid var(--border-glass);
+            }
+
+            .report-label {
+                font-size: .65rem; font-weight: 600; text-transform: uppercase;
+                letter-spacing: .08em; color: var(--text-muted);
+                margin-bottom: 8px;
+            }
+
+            .report-header h1 {
+                font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em;
+                margin-bottom: 4px;
+            }
+
+            .report-meta {
+                display: flex; gap: 24px; margin-top: 16px;
+                font-size: .8rem; color: var(--text-muted);
+            }
+            .report-meta span { display: flex; align-items: center; gap: 6px; }
+            .report-meta strong { color: var(--text-secondary); font-weight: 500; }
+
+            /* ── Score section ── */
+            .score-section {
+                padding: 36px 40px;
+                border-bottom: 1px solid var(--border-glass);
+                display: grid;
+                grid-template-columns: auto 1fr;
+                gap: 36px;
+                align-items: center;
+            }
+
+            .score-ring {
+                position: relative;
+                width: 120px;
+                height: 120px;
+                flex-shrink: 0;
+            }
+
+            .score-ring svg {
+                width: 120px;
+                height: 120px;
+                transform: rotate(-90deg);
+            }
+
+            .score-ring .bg-circle {
+                fill: none;
+                stroke: rgba(255,255,255,0.04);
+                stroke-width: 6;
+            }
+
+            .score-ring .progress-circle {
+                fill: none;
+                stroke: var(--danger);
+                stroke-width: 6;
+                stroke-linecap: round;
+                stroke-dasharray: 339.292;
+                stroke-dashoffset: 200;
+                transition: stroke-dashoffset 1.5s cubic-bezier(.22,1,.36,1);
+            }
+
+            .score-ring .score-number {
+                position: absolute;
+                inset: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .score-ring .score-number .num {
+                font-size: 2rem;
+                font-weight: 800;
+                line-height: 1;
+                color: var(--danger);
+            }
+
+            .score-ring .score-number .out-of {
+                font-size: .65rem;
+                color: var(--text-muted);
+                margin-top: 2px;
+            }
+
+            .score-details h2 {
+                font-size: 1.1rem;
+                font-weight: 600;
+                margin-bottom: 6px;
+            }
+
+            .score-details p {
+                font-size: .85rem;
+                color: var(--text-secondary);
+                margin-bottom: 12px;
+                line-height: 1.6;
+            }
+
+            .score-badge {
+                display: inline-block;
+                padding: 4px 12px;
+                border-radius: 4px;
+                font-size: .7rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: .03em;
+            }
+            .score-badge.fail { background: rgba(248,113,113,0.12); color: var(--danger); }
+            .score-badge.pass { background: rgba(52,211,153,0.12); color: var(--success); }
+            .score-badge.warn { background: rgba(251,191,36,0.12); color: var(--warning); }
+
+            /* ── Category scores ── */
+            .categories-section {
+                padding: 32px 40px;
+                border-bottom: 1px solid var(--border-glass);
+            }
+
+            .categories-section h3 {
+                font-size: .75rem; font-weight: 600; text-transform: uppercase;
+                letter-spacing: .06em; color: var(--text-muted);
+                margin-bottom: 20px;
+            }
+
+            .category-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .cat-item {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 12px 16px;
+                background: rgba(255,255,255,0.02);
+                border: 1px solid var(--border-glass);
+                border-radius: var(--radius-sm);
+            }
+
+            .cat-item .cat-name {
+                font-size: .8rem;
+                font-weight: 500;
+                color: var(--text-secondary);
+            }
+
+            .cat-item .cat-score {
+                font-size: .85rem;
+                font-weight: 700;
+            }
+
+            .cat-item .cat-score.poor { color: var(--danger); }
+            .cat-item .cat-score.ok { color: var(--warning); }
+            .cat-item .cat-score.good { color: var(--success); }
+            .cat-item .cat-score.great { color: var(--teal); }
+
+            .cat-bar {
+                width: 60px;
+                height: 4px;
+                background: rgba(255,255,255,0.04);
+                border-radius: 2px;
+                overflow: hidden;
+                flex-shrink: 0;
+            }
+
+            .cat-bar-fill {
+                height: 100%;
+                border-radius: 2px;
+                transition: width 1s cubic-bezier(.22,1,.36,1);
+            }
+
+            .cat-bar-fill.poor { background: var(--danger); }
+            .cat-bar-fill.ok { background: var(--warning); }
+            .cat-bar-fill.good { background: var(--success); }
+            .cat-bar-fill.great { background: var(--teal); }
+
+            .cat-left { display: flex; align-items: center; gap: 12px; }
+            .cat-right { display: flex; align-items: center; gap: 10px; }
+
+            /* ── Issues ── */
+            .issues-section {
+                padding: 32px 40px;
+                border-bottom: 1px solid var(--border-glass);
+            }
+
+            .issues-section h3 {
+                font-size: .75rem; font-weight: 600; text-transform: uppercase;
+                letter-spacing: .06em; color: var(--text-muted);
+                margin-bottom: 16px;
+            }
+
+            .issue-item {
+                display: flex;
+                gap: 12px;
+                padding: 12px 0;
+                border-bottom: 1px solid var(--border-glass);
+            }
+            .issue-item:last-child { border-bottom: none; }
+
+            .issue-icon {
+                width: 24px;
+                height: 24px;
+                flex-shrink: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                font-size: .7rem;
+                font-weight: 700;
+                margin-top: 2px;
+            }
+            .issue-icon.critical { background: rgba(248,113,113,0.15); color: var(--danger); }
+            .issue-icon.high { background: rgba(251,191,36,0.15); color: var(--warning); }
+            .issue-icon.medium { background: rgba(45,212,191,0.12); color: var(--teal); }
+
+            .issue-text { flex: 1; }
+            .issue-text .issue-title {
+                font-size: .85rem;
+                font-weight: 600;
+                color: var(--text-primary);
+                margin-bottom: 2px;
+            }
+            .issue-text .issue-desc {
+                font-size: .78rem;
+                color: var(--text-secondary);
+            }
+            .issue-text .issue-fix {
+                font-size: .78rem;
+                color: var(--accent);
+                margin-top: 2px;
+            }
+
+            .issue-severity {
+                font-size: .6rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: .05em;
+                padding: 2px 8px;
+                border-radius: 3px;
+                flex-shrink: 0;
+                align-self: flex-start;
+                margin-top: 4px;
+            }
+            .issue-severity.critical { background: rgba(248,113,113,0.1); color: var(--danger); }
+            .issue-severity.high { background: rgba(251,191,36,0.1); color: var(--warning); }
+            .issue-severity.medium { background: rgba(45,212,191,0.08); color: var(--teal); }
+
+            /* ── Recommendations ── */
+            .recs-section {
+                padding: 32px 40px 40px;
+            }
+
+            .recs-section h3 {
+                font-size: .75rem; font-weight: 600; text-transform: uppercase;
+                letter-spacing: .06em; color: var(--text-muted);
+                margin-bottom: 16px;
+            }
+
+            .rec-item {
+                display: flex;
+                gap: 12px;
+                padding: 10px 0;
+                border-bottom: 1px solid var(--border-glass);
+                align-items: flex-start;
+            }
+            .rec-item:last-child { border-bottom: none; }
+
+            .rec-num {
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                background: var(--accent-dim);
+                color: var(--accent);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: .7rem;
+                font-weight: 700;
+                flex-shrink: 0;
+                margin-top: 1px;
+            }
+
+            .rec-text { flex: 1; }
+            .rec-text .rec-title {
+                font-size: .85rem;
+                font-weight: 600;
+                color: var(--text-primary);
+                margin-bottom: 2px;
+            }
+            .rec-text .rec-desc {
+                font-size: .78rem;
+                color: var(--text-secondary);
+            }
+
+            /* ── CTA ── */
+            .report-cta {
+                margin-top: 24px;
+                text-align: center;
+                padding: 36px 40px;
+                background: linear-gradient(135deg, rgba(200,168,124,0.06) 0%, rgba(45,212,191,0.03) 100%);
+                border: 1px solid rgba(200,168,124,0.12);
+                border-radius: var(--radius);
+            }
+            .report-cta h3 {
+                font-size: 1.15rem; font-weight: 700; margin-bottom: 6px;
+            }
+            .report-cta p {
+                font-size: .85rem; color: var(--text-secondary); margin-bottom: 20px;
+            }
+
+            .btn-accent {
+                display: inline-flex; align-items: center; gap: 8px;
+                background: var(--accent); color: #0a0e1a;
+                font-weight: 700; font-size: .9rem;
+                padding: 14px 32px; border-radius: var(--radius-sm);
+                transition: transform .2s, box-shadow .2s;
+            }
+            .btn-accent:hover {
+                transform: translateY(-1px);
+                box-shadow: 0 8px 32px rgba(200,168,124,0.25);
+            }
+
+            /* ── Pulse nav ── */
+            .pulse-nav {
+                position: fixed; bottom: 32px; right: 32px; z-index: 200;
+            }
+            .pulse-btn {
+                position: relative; width: 60px; height: 60px; border-radius: 50%;
+                background: rgba(10,14,26,0.7); backdrop-filter: blur(16px);
+                border: 1px solid rgba(200,168,124,0.25);
+                display: flex; align-items: center; justify-content: center;
+                cursor: pointer; z-index: 2;
+                box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+                transition: transform .3s, border-color .3s;
+            }
+            .pulse-btn:hover { transform: scale(1.05); border-color: rgba(200,168,124,0.4); }
+            .pulse-btn svg { width: 22px; height: 22px; color: var(--accent); }
+            .pulse-btn.open svg { opacity: .6; }
+            .pulse-ring {
+                position: absolute; inset: -8px; border-radius: 50%;
+                border: 2px solid rgba(200,168,124,0.12);
+                animation: pulseRing 3s ease-out infinite; pointer-events: none;
+            }
+            .pulse-ring:nth-child(2) { animation-delay: 1.5s; }
+            @keyframes pulseRing {
+                0% { transform: scale(1); opacity: .5; }
+                100% { transform: scale(1.7); opacity: 0; }
+            }
+            .pulse-menu {
+                position: absolute; bottom: 68px; right: 4px; min-width: 210px;
+                background: rgba(10,14,26,0.8); backdrop-filter: blur(24px);
+                border: 1px solid var(--border-glass); border-radius: 16px;
+                padding: 12px 8px;
+                opacity: 0; transform: translateY(12px) scale(0.95);
+                pointer-events: none;
+                transition: opacity .3s, transform .3s;
+                box-shadow: 0 12px 48px rgba(0,0,0,0.4);
+            }
+            .pulse-menu.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: all; }
+            .pulse-menu a {
+                display: flex; align-items: center; gap: 12px;
+                padding: 12px 16px; border-radius: 10px;
+                font-size: .9rem; font-weight: 500; color: var(--text-secondary);
+                opacity: 0; transform: translateY(8px);
+                transition: background .2s, color .2s, opacity .25s, transform .25s;
+            }
+            .pulse-menu.open a { opacity: 1; transform: translateY(0); }
+            .pulse-menu.open a:nth-child(1) { transition-delay: 0.05s; }
+            .pulse-menu.open a:nth-child(2) { transition-delay: 0.10s; }
+            .pulse-menu.open a:nth-child(3) { transition-delay: 0.15s; }
+            .pulse-menu a:hover { background: rgba(255,255,255,0.06); color: var(--text-primary); }
+            .pulse-menu a svg { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; }
+            .pulse-menu .menu-divider { height: 1px; background: var(--border-glass); margin: 6px 16px; opacity: 0; transition: opacity .2s; transition-delay: 0.12s; }
+            .pulse-menu.open .menu-divider { opacity: 1; }
+            .pulse-overlay {
+                position: fixed; inset: 0; z-index: 199;
+                background: rgba(0,0,0,0.3);
+                opacity: 0; pointer-events: none; transition: opacity .3s;
+            }
+            .pulse-overlay.open { opacity: 1; pointer-events: all; }
+
+            footer {
+                padding: 32px 0;
+                border-top: 1px solid var(--border-glass);
+                text-align: center;
+            }
+            footer p { font-size: .8rem; color: var(--text-muted); }
+            footer a { color: var(--accent); }
+            footer a:hover { opacity: .7; }
+        }
+
+        @media (max-width: 700px) {
+            .score-section { grid-template-columns: 1fr; text-align: center; gap: 20px; }
+            .score-ring { margin: 0 auto; }
+            .category-grid { grid-template-columns: 1fr; }
+            .report-header { padding: 28px 20px; }
+            .score-section { padding: 24px 20px; }
+            .categories-section { padding: 24px 20px; }
+            .issues-section { padding: 24px 20px; }
+            .recs-section { padding: 24px 20px; }
+            .report-cta { padding: 24px 20px; }
+            .nav-back span { display: none; }
+            .pulse-nav { bottom: 24px; right: 16px; }
+            .pulse-btn { width: 54px; height: 54px; }
+        }
+
+        @media (max-width: 600px) {
+            .report-meta { flex-direction: column; gap: 8px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .pulse-ring { display: none; }
+            .score-ring .progress-circle { transition: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-brand">DS <span>Studios</span></a>
+            <a href="/" class="nav-back">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                <span>Back to home</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="page-wrap">
+        <div class="container">
+            <div class="report-label" style="margin-bottom: 8px;">Sample Report</div>
+
+            <div class="report-card">
+
+                <div class="report-header">
+                    <h1>Website Audit Report</h1>
+                    <div class="report-meta">
+                        <span>Business: <strong>O'Brien's Hardware, Carlow</strong></span>
+                        <span>Date: <strong>15 May 2026</strong></span>
+                        <span>Pages scanned: <strong>14</strong></span>
+                    </div>
+                </div>
+
+                <div class="score-section">
+                    <div class="score-ring">
+                        <svg viewBox="0 0 120 120">
+                            <circle class="bg-circle" cx="60" cy="60" r="54"/>
+                            <circle class="progress-circle" cx="60" cy="60" r="54"/>
+                        </svg>
+                        <div class="score-number">
+                            <span class="num">42</span>
+                            <span class="out-of">of 100</span>
+                        </div>
+                    </div>
+                    <div class="score-details">
+                        <span class="score-badge fail">Needs work</span>
+                        <h2 style="margin-top: 12px;">Your site is underperforming</h2>
+                        <p>A score of 42 indicates significant issues across multiple categories. The good news: most are fixable. The report below prioritises what to address first for maximum impact.</p>
+                        <p style="margin-bottom: 0;">The average score for Irish small businesses in similar industries is 61. Your site scores below average in every category except mobile readiness.</p>
+                    </div>
+                </div>
+
+                <div class="categories-section">
+                    <h3>Category breakdown</h3>
+                    <div class="category-grid">
+
+                        <div class="cat-item">
+                            <div class="cat-left">
+                                <div class="cat-name">Security</div>
+                                <div class="cat-bar"><div class="cat-bar-fill ok" style="width:58%"></div></div>
+                            </div>
+                            <div class="cat-right">
+                                <span class="cat-score ok">58</span>
+                            </div>
+                        </div>
+
+                        <div class="cat-item">
+                            <div class="cat-left">
+                                <div class="cat-name">SEO</div>
+                                <div class="cat-bar"><div class="cat-bar-fill ok" style="width:52%"></div></div>
+                            </div>
+                            <div class="cat-right">
+                                <span class="cat-score ok">52</span>
+                            </div>
+                        </div>
+
+                        <div class="cat-item">
+                            <div class="cat-left">
+                                <div class="cat-name">Performance</div>
+                                <div class="cat-bar"><div class="cat-bar-fill poor" style="width:30%"></div></div>
+                            </div>
+                            <div class="cat-right">
+                                <span class="cat-score poor">30</span>
+                            </div>
+                        </div>
+
+                        <div class="cat-item">
+                            <div class="cat-left">
+                                <div class="cat-name">Mobile</div>
+                                <div class="cat-bar"><div class="cat-bar-fill good" style="width:72%"></div></div>
+                            </div>
+                            <div class="cat-right">
+                                <span class="cat-score good">72</span>
+                            </div>
+                        </div>
+
+                        <div class="cat-item">
+                            <div class="cat-left">
+                                <div class="cat-name">Design &amp; Code</div>
+                                <div class="cat-bar"><div class="cat-bar-fill poor" style="width:35%"></div></div>
+                            </div>
+                            <div class="cat-right">
+                                <span class="cat-score poor">35</span>
+                            </div>
+                        </div>
+
+                        <div class="cat-item">
+                            <div class="cat-left">
+                                <div class="cat-name">Content</div>
+                                <div class="cat-bar"><div class="cat-bar-fill ok" style="width:48%"></div></div>
+                            </div>
+                            <div class="cat-right">
+                                <span class="cat-score ok">48</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="issues-section">
+                    <h3>Top issues found</h3>
+
+                    <div class="issue-item">
+                        <div class="issue-icon critical">!</div>
+                        <div class="issue-text">
+                            <div class="issue-title">HTTPS certificate expired</div>
+                            <div class="issue-desc">SSL certificate expired 23 days ago. Visitors see a full-page security warning before they can access your site.</div>
+                            <div class="issue-fix">Renew via your hosting panel or Let's Encrypt. Should take under 10 minutes.</div>
+                        </div>
+                        <span class="issue-severity critical">Critical</span>
+                    </div>
+
+                    <div class="issue-item">
+                        <div class="issue-icon high">!</div>
+                        <div class="issue-text">
+                            <div class="issue-title">Page weight too high</div>
+                            <div class="issue-desc">Homepage loads 3.2 MB of resources. Target is under 500 KB. Unoptimised images account for 2.1 MB.</div>
+                            <div class="issue-fix">Compress hero image (currently 1.4 MB PNG). Convert to WebP. Implement lazy loading.</div>
+                        </div>
+                        <span class="issue-severity high">High</span>
+                    </div>
+
+                    <div class="issue-item">
+                        <div class="issue-icon high">!</div>
+                        <div class="issue-text">
+                            <div class="issue-title">Missing meta descriptions on 8 of 14 pages</div>
+                            <div class="issue-desc">Search engines auto-generate snippets from page content, which often look incoherent. This hurts click-through rates.</div>
+                            <div class="issue-fix">Write unique meta descriptions for each page. Keep under 160 characters. Include primary keyword.</div>
+                        </div>
+                        <span class="issue-severity high">High</span>
+                    </div>
+
+                    <div class="issue-item">
+                        <div class="issue-icon medium">!</div>
+                        <div class="issue-text">
+                            <div class="issue-title">No Content Security Policy header</div>
+                            <div class="issue-desc">Your site does not have a CSP header. This increases the risk of cross-site scripting and data injection attacks.</div>
+                            <div class="issue-fix">Implement CSP in report-only mode first, then enforce. Our report includes a recommended starter policy.</div>
+                        </div>
+                        <span class="issue-severity medium">Medium</span>
+                    </div>
+
+                    <div class="issue-item">
+                        <div class="issue-icon medium">!</div>
+                        <div class="issue-text">
+                            <div class="issue-title">No HSTS preloading</div>
+                            <div class="issue-desc">HSTS header is present but preloading is not configured. First-time visitors are vulnerable to downgrade attacks.</div>
+                            <div class="issue-fix">Add preload directive to HSTS header and submit your domain to the preload list at hstspreload.org.</div>
+                        </div>
+                        <span class="issue-severity medium">Medium</span>
+                    </div>
+
+                </div>
+
+                <div class="recs-section">
+                    <h3>Prioritised recommendations</h3>
+
+                    <div class="rec-item">
+                        <div class="rec-num">1</div>
+                        <div class="rec-text">
+                            <div class="rec-title">Renew SSL certificate immediately</div>
+                            <div class="rec-desc">An expired certificate blocks visitors entirely. This is losing you customers right now. Most hosts offer free Let's Encrypt certificates with one-click renewal.</div>
+                        </div>
+                    </div>
+
+                    <div class="rec-item">
+                        <div class="rec-num">2</div>
+                        <div class="rec-text">
+                            <div class="rec-title">Compress and convert all images</div>
+                            <div class="rec-desc">Replacing the 1.4 MB hero PNG with a WebP alternative will cut page weight by 80%. Implement lazy loading on images below the fold. This alone moves your performance score from 30 to 55+.</div>
+                        </div>
+                    </div>
+
+                    <div class="rec-item">
+                        <div class="rec-num">3</div>
+                        <div class="rec-text">
+                            <div class="rec-title">Write meta descriptions for all pages</div>
+                            <div class="rec-desc">This is an afternoon's work that directly increases search click-through rates. Each description should be unique, include the page's primary keyword, and state the value to the visitor.</div>
+                        </div>
+                    </div>
+
+                    <div class="rec-item">
+                        <div class="rec-num">4</div>
+                        <div class="rec-text">
+                            <div class="rec-title">Enable security headers</div>
+                            <div class="rec-desc">Add Content Security Policy, X-Frame-Options, X-Content-Type-Options, and Referrer-Policy headers. Our audit includes the exact header values recommended for your setup.</div>
+                        </div>
+                    </div>
+
+                    <div class="rec-item">
+                        <div class="rec-num">5</div>
+                        <div class="rec-text">
+                            <div class="rec-title">Configure browser caching</div>
+                            <div class="rec-desc">Set Cache-Control headers for static assets. Returning visitors will load your site 40-60% faster. Set a one-year cache for images, CSS, and JavaScript files.</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="report-cta">
+                <h3>Get your real report — free</h3>
+                <p>Enter your website URL and we'll send a full audit like this to your inbox.</p>
+                <a href="/#audit-form" class="btn-accent">Get your free audit</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="pulse-overlay" id="pulseOverlay"></div>
+    <div class="pulse-nav" id="pulseNav">
+        <div class="pulse-btn" id="pulseBtn" role="button" tabindex="0" aria-label="Open navigation">
+            <div class="pulse-ring"></div>
+            <div class="pulse-ring"></div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a7 7 0 0 0 0 14"/><path d="M12 16a7 7 0 0 0 0-14"/><circle cx="12" cy="12" r="2"/></svg>
+        </div>
+        <div class="pulse-menu" id="pulseMenu">
+            <a href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a>
+            <a href="/learn/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h6z"/></svg>Learn</a>
+            <div class="menu-divider"></div>
+            <a href="/#audit-form" id="pulseAuditLink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Get your free audit</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p><a href="/">Site Reports</a> by DS Studios | Website audits for Irish small businesses</p>
+        </div>
+    </footer>
+
+    <script>!function(){var btn=document.getElementById('pulseBtn'),menu=document.getElementById('pulseMenu'),overlay=document.getElementById('pulseOverlay'),auditLink=document.getElementById('pulseAuditLink'),isOpen=!1;function toggle(){isOpen=!isOpen;btn.classList.toggle('open',isOpen);menu.classList.toggle('open',isOpen);overlay.classList.toggle('open',isOpen);btn.setAttribute('aria-label',isOpen?'Close navigation':'Open navigation')}function close(){if(isOpen)toggle()}if(btn){btn.addEventListener('click',function(e){e.stopPropagation();toggle()});btn.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle()}if(e.key==='Escape'&&isOpen)close()})}if(overlay)overlay.addEventListener('click',close);document.addEventListener('keydown',function(e){if(e.key==='Escape'&&isOpen)close()});if(auditLink)auditLink.addEventListener('click',function(){close()})}();</script>
+</body>
+</html>

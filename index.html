@@ -32,6 +32,9 @@
                 --accent: #2dd4bf;
                 --accent-dim: rgba(45,212,191,0.3);
                 --accent-glow: rgba(45,212,191,0.08);
+                --warm: #c8a87c;
+                --warm-dim: rgba(200,168,124,0.25);
+                --warm-glow: rgba(200,168,124,0.08);
                 --text-primary: #f1f5f9;
                 --text-secondary: #94a3b8;
                 --text-muted: #475569;
@@ -201,7 +204,7 @@
             }
 
             .nav-brand span {
-                background: linear-gradient(135deg, var(--accent), #818cf8);
+                background: linear-gradient(135deg, var(--accent), var(--warm));
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
                 background-clip: text;
@@ -283,7 +286,7 @@
             }
 
             .hero h1 .gradient-text {
-                background: linear-gradient(135deg, var(--accent) 0%, #818cf8 40%, #a78bfa 100%);
+                background: linear-gradient(135deg, var(--accent) 0%, var(--warm) 60%, var(--accent) 100%);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
                 background-clip: text;
@@ -307,7 +310,7 @@
                 display: inline-flex;
                 align-items: center;
                 gap: 8px;
-                background: var(--accent);
+                background: var(--warm);
                 color: #070b1a;
                 font-weight: 700;
                 font-size: .95rem;
@@ -634,7 +637,7 @@
 
             .btn-submit {
                 width: 100%;
-                background: var(--accent);
+                background: var(--warm);
                 color: #070b1a;
                 border: none;
                 padding: 14px 24px;
@@ -1026,16 +1029,16 @@
                 <div class="hero-text">
                     <div class="hero-badge">Free Website Audit</div>
                     <h1>
-                        Your site.<br>
-                        <span class="gradient-text">Analysed.</span>
+                        Your site<br>
+                        <span class="gradient-text">revealed.</span>
                     </h1>
-                    <p>SEO, performance, mobile, design, content. A comprehensive review of your small business website delivered to your inbox. Independent, honest, actionable.</p>
+                    <p>Every issue. Every score. Every fix. We crawl your small business website across six categories and deliver a complete audit to your inbox. No signup, no upsell.</p>
                     <div class="hero-actions">
-                        <a href="#audit-form" class="btn-primary">
-                            Get your free report
+                        <a href="/sample-report/" class="btn-primary">
+                            See a sample report
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </a>
-                        <span class="hero-sub">30 seconds | No credit card</span>
+                        <span class="hero-sub">Or <a href="#audit-form" style="color:var(--warm);text-decoration:underline;">get your free audit</a></span>
                     </div>
                 </div>
                 <div class="hero-visual">
@@ -1070,27 +1073,49 @@
         </div>
     </section>
 
-    <!-- ── How it works ── -->
-    <section>
+    <!-- ── Process ── -->
+    <section class="process-section">
         <div class="container">
             <div class="section-label">Process</div>
-            <h2 class="section-title">How it works</h2>
-            <p class="section-sub">Three steps from URL to actionable insights. No signup, no hidden costs.</p>
-            <div class="steps-grid">
-                <div class="step-card glass-card reveal">
-                    <div class="step-number">Step 01</div>
-                    <h3>Submit your URL</h3>
-                    <p>Tell us what site to audit. Your name and email for delivery.</p>
+            <h2 class="section-title">See it in motion</h2>
+            <p class="section-sub">Not a flowchart. A live demonstration of what happens when you submit your URL.</p>
+            <div class="process-grid">
+                <div class="process-visual" id="processVisual">
+                    <div class="process-canvas">
+                        <svg viewBox="0 0 280 280">
+                            <circle class="pc-ring" cx="140" cy="140" r="120"/>
+                            <circle class="pc-arc" id="arc1" cx="140" cy="140" r="120" stroke-dasharray="188.5" stroke-dashoffset="188.5" transform="rotate(-90 140 140)"/>
+                            <circle class="pc-arc" id="arc2" cx="140" cy="140" r="120" stroke-dasharray="188.5" stroke-dashoffset="188.5" transform="rotate(0 140 140)"/>
+                            <circle class="pc-arc" id="arc3" cx="140" cy="140" r="120" stroke-dasharray="188.5" stroke-dashoffset="188.5" transform="rotate(90 140 140)"/>
+                            <circle class="pc-arc" id="arc4" cx="140" cy="140" r="120" stroke-dasharray="188.5" stroke-dashoffset="188.5" transform="rotate(180 140 140)"/>
+                        </svg>
+                        <svg class="process-icon icon-submit" id="pIcon1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <svg class="process-icon icon-crawl" id="pIcon2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v3l2 1"/></svg>
+                        <svg class="process-icon icon-score" id="pIcon3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        <svg class="process-icon icon-deliver" id="pIcon4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg>
+                    </div>
                 </div>
-                <div class="step-card glass-card reveal">
-                    <div class="step-number">Step 02</div>
-                    <h3>We analyse it</h3>
-                    <p>Full crawl across five categories. Dozens of individual checks per category.</p>
-                </div>
-                <div class="step-card glass-card reveal">
-                    <div class="step-number">Step 03</div>
-                    <h3>Report arrives</h3>
-                    <p>Detailed findings and prioritised fixes land in your inbox.</p>
+                <div class="process-steps" id="processSteps">
+                    <div class="ps-card" data-step="0">
+                        <div class="ps-num">Step 01</div>
+                        <div class="ps-title">Submit your URL</div>
+                        <div class="ps-desc">Enter your website address. Our crawler receives the request and prepares a comprehensive scan.</div>
+                    </div>
+                    <div class="ps-card" data-step="1">
+                        <div class="ps-num">Step 02</div>
+                        <div class="ps-title">Full crawl</div>
+                        <div class="ps-desc">Every page is scanned across security, SEO, performance, mobile, design, and content. Dozens of checks per page.</div>
+                    </div>
+                    <div class="ps-card" data-step="2">
+                        <div class="ps-num">Step 03</div>
+                        <div class="ps-title">Scores generated</div>
+                        <div class="ps-desc">Results are analysed and scored. Issues are prioritised by severity and grouped into actionable recommendations.</div>
+                    </div>
+                    <div class="ps-card" data-step="3">
+                        <div class="ps-num">Step 04</div>
+                        <div class="ps-title">Report delivered</div>
+                        <div class="ps-desc">A full audit lands in your inbox. Every finding, every score, every fix — ready to act on.</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1126,6 +1151,69 @@
                 <div class="glass-card check-card reveal">
                     <h4>Priorities</h4>
                     <p>Clear ranked recommendations. Know exactly what to fix first for maximum impact.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Sample report preview ── -->
+    <div class="sample-strip">
+        <div class="container">
+            <div class="ss-text">
+                <h3>See a real report</h3>
+                <p>O'Brien's Hardware, Carlow scored 42 of 100. Here is exactly what we found and what we recommended.</p>
+            </div>
+            <a href="/sample-report/" class="ss-btn">
+                View sample report
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- ── Test Us ── -->
+    <section class="test-section" id="test-us">
+        <div class="container">
+            <div class="test-grid">
+                <div class="test-input-area">
+                    <h2>Test us. Type your URL.</h2>
+                    <p class="test-sub">Watch the checks appear as you type. Every item is what we scan in your real audit.</p>
+                    <div class="test-field">
+                        <input type="text" id="testUrlInput" placeholder="yourbusiness.ie" autocomplete="off">
+                        <button class="test-go" id="testUrlGo">Check it</button>
+                    </div>
+                </div>
+                <div class="test-preview">
+                    <div class="test-preview-inner">
+                        <div class="test-check-list" id="testCheckList">
+                            <div class="test-check-item" data-check="0">
+                                <div class="tci-icon pending">?</div>
+                                <div class="tci-text"><strong>HTTPS</strong> — certificate status and encryption check</div>
+                            </div>
+                            <div class="test-check-item" data-check="1">
+                                <div class="tci-icon pending">?</div>
+                                <div class="tci-text"><strong>SEO</strong> — titles, meta, headings, structure</div>
+                            </div>
+                            <div class="test-check-item" data-check="2">
+                                <div class="tci-icon pending">?</div>
+                                <div class="tci-text"><strong>Performance</strong> — page weight, images, caching</div>
+                            </div>
+                            <div class="test-check-item" data-check="3">
+                                <div class="tci-icon pending">?</div>
+                                <div class="tci-text"><strong>Mobile</strong> — viewport, touch targets, responsiveness</div>
+                            </div>
+                            <div class="test-check-item" data-check="4">
+                                <div class="tci-icon pending">?</div>
+                                <div class="tci-text"><strong>Design</strong> — code quality, favicon, framework</div>
+                            </div>
+                            <div class="test-check-item" data-check="5">
+                                <div class="tci-icon pending">?</div>
+                                <div class="tci-text"><strong>Content</strong> — link health, contact info, readability</div>
+                            </div>
+                        </div>
+                        <div class="test-hint" id="testHint">
+                            Looks good. Your real audit will include all this and more. <a href="#audit-form">Get the full report.</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1216,6 +1304,110 @@
         });
     </script>
     <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+
+    <script>
+        // ── Process visualization scroll sync ──
+        (function() {
+            var steps = document.querySelectorAll('.ps-card');
+            var arcs = [
+                document.getElementById('arc1'),
+                document.getElementById('arc2'),
+                document.getElementById('arc3'),
+                document.getElementById('arc4')
+            ];
+            var icons = [
+                document.getElementById('pIcon1'),
+                document.getElementById('pIcon2'),
+                document.getElementById('pIcon3'),
+                document.getElementById('pIcon4')
+            ];
+
+            if (!steps.length) return;
+
+            var observer = new IntersectionObserver(function(entries) {
+                var maxVisible = -1;
+                entries.forEach(function(entry) {
+                    var idx = parseInt(entry.target.dataset.step);
+                    if (entry.isIntersecting && idx > maxVisible) maxVisible = idx;
+                });
+
+                var activeIdx = Math.max(0, maxVisible);
+
+                steps.forEach(function(s, i) {
+                    s.classList.toggle('active', i <= activeIdx);
+                });
+
+                arcs.forEach(function(arc, i) {
+                    arc.classList.toggle('active', i <= activeIdx);
+                });
+
+                icons.forEach(function(icon, i) {
+                    if (icon) icon.classList.toggle('active', i <= activeIdx);
+                });
+            }, { threshold: 0.3 });
+
+            steps.forEach(function(s) { observer.observe(s); });
+        })();
+
+        // ── Test-us challenge ──
+        (function() {
+            var input = document.getElementById('testUrlInput');
+            var items = document.querySelectorAll('.test-check-item');
+            var hint = document.getElementById('testHint');
+            var goBtn = document.getElementById('testUrlGo');
+
+            if (!input) return;
+
+            function triggerChecks() {
+                var val = input.value.trim();
+                if (val.length < 2) {
+                    items.forEach(function(item, i) {
+                        var icon = item.querySelector('.tci-icon');
+                        item.classList.remove('visible');
+                        icon.className = 'tci-icon pending';
+                        icon.textContent = '?';
+                        var text = item.querySelector('.tci-text');
+                        text.innerHTML = text.innerHTML.replace(/style="color:[^"]+"/g, '');
+                    });
+                    if (hint) hint.classList.remove('visible');
+                    return;
+                }
+
+                items.forEach(function(item, i) {
+                    setTimeout(function() {
+                        item.classList.add('visible');
+                        var icon = item.querySelector('.tci-icon');
+                        icon.className = 'tci-icon done';
+                        icon.textContent = '\u2713';
+                        var strong = item.querySelector('strong');
+                        if (strong) strong.style.color = '#34d399';
+                    }, (i + 1) * 300);
+                });
+
+                setTimeout(function() {
+                    if (hint) hint.classList.add('visible');
+                }, items.length * 300 + 400);
+            }
+
+            input.addEventListener('input', function() {
+                // Debounce
+                clearTimeout(input._timer);
+                input._timer = setTimeout(triggerChecks, 300);
+            });
+
+            if (goBtn) {
+                goBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    triggerChecks();
+                });
+            }
+
+            // Trigger on page load if demo value present
+            if (input.value.trim().length >= 2) {
+                triggerChecks();
+            }
+        })();
+    </script>
 
     <!-- ── Circular Pulse Nav ── -->
     <div class="pulse-overlay" id="pulseOverlay"></div>
