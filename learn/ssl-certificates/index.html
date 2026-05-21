@@ -1,0 +1,34 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>SSL / TLS Certificates Explained for Small Business Websites — Site Reports</title><meta name="description" content="What is an SSL certificate, how TLS encryption works, and why your Irish small business website needs one. Free audit checks your certificate status."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../learn.css"></head><body>
+<nav class="nav"><div class="nav-inner"><a href="/" class="nav-brand">DS <span>Studios</span></a></div></nav>
+<div class="page-wrap"><div class="container"><div class="content-card">
+<div class="breadcrumb"><a href="/learn/">Learn</a> / <span>SSL / TLS Certificates</span></div>
+<div class="tag tag-security">Security</div>
+<h1>SSL / TLS certificates explained</h1>
+<p class="page-desc">An SSL or TLS certificate is a digital file that authenticates your website and enables encrypted connections. Without one, your site cannot use HTTPS.</p>
+
+<h2>What is an SSL certificate</h2>
+<p>SSL (Secure Sockets Layer) and its successor TLS (Transport Layer Security) are cryptographic protocols. An SSL certificate is a data file installed on your web server that binds your domain name to a cryptographic key pair. When a browser connects to your site, the certificate proves your server's identity and establishes an encrypted tunnel.</p>
+<p>The term "SSL certificate" is still common, but virtually all certificates today use TLS. The name has stuck.</p>
+
+<h2>How certificates work</h2>
+<p>A certificate contains your domain name, the issuing Certificate Authority (CA), a public key, an expiration date, and a digital signature from the CA. When a visitor's browser connects, your server presents this certificate. The browser checks the CA's signature, verifies the domain matches, confirms the date is valid, and initiates an encrypted session.</p>
+<p>This process happens in milliseconds and is invisible to the visitor. The only visible clue is the padlock icon in the address bar.</p>
+
+<h2>Types of certificates</h2>
+<p><strong>Domain Validation (DV)</strong> verifies you control the domain. This is the most common type and sufficient for most small business websites. Let's Encrypt issues DV certificates free of charge.</p>
+<p><strong>Organization Validation (OV)</strong> verifies your business identity in addition to domain control. The CA checks your company registration details.</p>
+<p><strong>Extended Validation (EV)</strong> involves a thorough vetting process. EV certificates used to show a green address bar, but modern browsers have moved away from this visual treatment.</p>
+
+<h2>What happens when a certificate expires</h2>
+<p>Browsers display a full-page security warning when they encounter an expired certificate. Visitors cannot proceed without bypassing the warning manually. This destroys trust and drives users away. An expired certificate audit flag is a critical issue in any site report.</p>
+
+<h2>Free vs paid certificates</h2>
+<p>Let's Encrypt provides free DV certificates that are technically identical to paid options. They renew automatically and are trusted by all major browsers. Paid certificates offer higher validation levels (OV/EV), longer validity periods historically, and sometimes warranty protection. For a typical Irish small business, Let's Encrypt is the right choice.</p>
+
+<h2>Certificate management</h2>
+<p>Modern hosting panels automate certificate issuance and renewal. cPanel, Plesk, and most managed WordPress hosts include Let's Encrypt integration. If your hosting does not offer automated SSL, it is time to switch providers.</p>
+
+<div class="related-topics"><h3>Related topics</h3><div class="related-grid"><a href="../https-importance/">Why HTTPS Matters</a><a href="../mixed-content/">Mixed Content Warnings</a><a href="../hsts-security/">HSTS Security</a></div></div></div>
+<div class="cta-section"><h3>Check your certificate status</h3><p>We verify certificate validity and configuration in every free audit.</p><a href="/#audit-form" class="cta-btn">Get your free audit</a></div></div></div>
+<footer><div class="container"><p><a href="/">Site Reports</a> by DS Studios | Website audits for Irish small businesses</p></div></footer>
+</body></html>

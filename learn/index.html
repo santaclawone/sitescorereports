@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learn — Site Reports by DS Studios</title>
+  <meta name="description" content="Free guides on website audits, SEO, performance, security, mobile, and more. Learn what each audit check means and how to improve your score.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="learn.css">
+  <style>
+    .topic-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 0;
+    }
+    .topic-card {
+      display: block;
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-sm);
+      transition: background .2s, border-color .2s;
+    }
+    .topic-card:hover {
+      background: var(--bg-glass-hover);
+      border-color: var(--border-glass-hover);
+    }
+    .topic-card h3 {
+      font-size: .9rem; font-weight: 600; margin-bottom: 2px;
+      color: var(--text-primary);
+    }
+    .topic-card p {
+      font-size: .78rem; color: var(--text-muted); line-height: 1.4;
+    }
+    .category-block { margin-bottom: 32px; }
+    .category-block:last-child { margin-bottom: 0; }
+    .cat-title {
+      font-size: .7rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--text-muted);
+      margin-bottom: 12px; padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-glass);
+    }
+    @media (max-width: 600px) {
+      .topic-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">DS <span>Studios</span></a>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+    <div class="container">
+      <div class="content-card">
+        <h1>Learn</h1>
+        <p class="page-desc">Reference guides for every check in your site report. Understand the terminology, why each factor matters, and how to improve your score.</p>
+
+        <div class="category-block">
+          <div class="cat-title">Security &amp; Infrastructure</div>
+          <div class="topic-grid">
+            <a href="https-importance/" class="topic-card"><h3>Why HTTPS Matters</h3><p>HTTP vs HTTPS and why every site needs encryption</p></a>
+            <a href="ssl-certificates/" class="topic-card"><h3>SSL / TLS Certificates</h3><p>What certificates are and how they secure your site</p></a>
+            <a href="mixed-content/" class="topic-card"><h3>Mixed Content Warnings</h3><p>Why some resources load over HTTP on HTTPS pages</p></a>
+            <a href="hsts-security/" class="topic-card"><h3>HSTS Security</h3><p>HTTP Strict Transport Security explained</p></a>
+            <a href="security-headers/" class="topic-card"><h3>Security Headers</h3><p>Headers that protect your site from common attacks</p></a>
+          </div>
+        </div>
+
+        <div class="category-block">
+          <div class="cat-title">SEO</div>
+          <div class="topic-grid">
+            <a href="title-tags/" class="topic-card"><h3>Title Tags</h3><p>The most important on-page SEO element</p></a>
+            <a href="meta-descriptions/" class="topic-card"><h3>Meta Descriptions</h3><p>How to write descriptions that drive clicks</p></a>
+            <a href="heading-structure/" class="topic-card"><h3>Heading Hierarchy</h3><p>H1 to H6 — why structure matters for SEO</p></a>
+            <a href="canonical-urls/" class="topic-card"><h3>Canonical URLs</h3><p>Preventing duplicate content issues</p></a>
+            <a href="open-graph-tags/" class="topic-card"><h3>Open Graph Tags</h3><p>Control how your site appears on social media</p></a>
+            <a href="structured-data/" class="topic-card"><h3>Structured Data</h3><p>Schema markup and rich search results</p></a>
+            <a href="sitemaps/" class="topic-card"><h3>Sitemaps &amp; Crawling</h3><p>How search engines discover your pages</p></a>
+          </div>
+        </div>
+
+        <div class="category-block">
+          <div class="cat-title">Performance</div>
+          <div class="topic-grid">
+            <a href="page-speed/" class="topic-card"><h3>Page Speed</h3><p>Why speed matters for users and search rankings</p></a>
+            <a href="image-optimization/" class="topic-card"><h3>Image Optimization</h3><p>Formats, compression, and lazy loading</p></a>
+            <a href="render-blocking/" class="topic-card"><h3>Render-Blocking Resources</h3><p>CSS and JS that delay your page from loading</p></a>
+            <a href="browser-caching/" class="topic-card"><h3>Browser Caching</h3><p>How caching speeds up return visits</p></a>
+            <a href="core-web-vitals/" class="topic-card"><h3>Core Web Vitals</h3><p>LCP, FID, CLS — Google's performance metrics</p></a>
+          </div>
+        </div>
+
+        <div class="category-block">
+          <div class="cat-title">Mobile</div>
+          <div class="topic-grid">
+            <a href="mobile-friendliness/" class="topic-card"><h3>Mobile Friendliness</h3><p>Why mobile-first matters for modern websites</p></a>
+            <a href="viewport-configuration/" class="topic-card"><h3>Viewport Configuration</h3><p>How the viewport meta tag controls mobile display</p></a>
+            <a href="touch-targets/" class="topic-card"><h3>Touch Targets</h3><p>Why 48px is the minimum tap size</p></a>
+            <a href="responsive-design/" class="topic-card"><h3>Responsive Design</h3><p>One site that works on every screen size</p></a>
+          </div>
+        </div>
+
+        <div class="category-block">
+          <div class="cat-title">Code &amp; Design</div>
+          <div class="topic-grid">
+            <a href="favicon/" class="topic-card"><h3>Favicons</h3><p>What a favicon is and why your site needs one</p></a>
+            <a href="html-validation/" class="topic-card"><h3>HTML Validation</h3><p>Why valid code matters for accessibility and SEO</p></a>
+            <a href="website-frameworks/" class="topic-card"><h3>Website Frameworks</h3><p>CMS and framework detection explained</p></a>
+          </div>
+        </div>
+
+        <div class="category-block">
+          <div class="cat-title">Content &amp; UX</div>
+          <div class="topic-grid">
+            <a href="link-health/" class="topic-card"><h3>Link Health</h3><p>Internal and external link quality and structure</p></a>
+            <a href="contact-information/" class="topic-card"><h3>Contact Information</h3><p>What contact details to include and where</p></a>
+            <a href="readability/" class="topic-card"><h3>Readability</h3><p>Content length, reading level, and engagement</p></a>
+            <a href="website-accessibility/" class="topic-card"><h3>Website Accessibility</h3><p>Making your site usable for everyone</p></a>
+            <a href="website-freshness/" class="topic-card"><h3>Website Freshness</h3><p>Why outdated content hurts your site</p></a>
+          </div>
+        </div>
+
+        <div class="category-block">
+          <div class="cat-title">Business</div>
+          <div class="topic-grid">
+            <a href="website-audit-guide/" class="topic-card"><h3>Website Audit Guide</h3><p>What a website audit covers and why you need one</p></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-section" style="margin-top:32px;">
+        <h3>Ready for your report?</h3>
+        <p>Get a free, comprehensive audit of your website delivered to your inbox.</p>
+        <a href="/#audit-form" class="cta-btn">Get your free audit</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p><a href="/">Site Reports</a> by DS Studios | Website audits for Irish small businesses</p>
+    </div>
+  </footer>
+</body>
+</html>

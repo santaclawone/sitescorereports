@@ -1,0 +1,31 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Mixed Content Warnings — What They Are and How to Fix Them — Site Reports</title><meta name="description" content="Mixed content warnings happen when an HTTPS page loads HTTP resources. Learn why they break security and hurt your site's trust with visitors."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../learn.css"></head><body>
+<nav class="nav"><div class="nav-inner"><a href="/" class="nav-brand">DS <span>Studios</span></a></div></nav>
+<div class="page-wrap"><div class="container"><div class="content-card">
+<div class="breadcrumb"><a href="/learn/">Learn</a> / <span>Mixed Content Warnings</span></div>
+<div class="tag tag-security">Security</div>
+<h1>Mixed content warnings</h1>
+<p class="page-desc">A mixed content warning appears when an HTTPS page loads images, scripts, or stylesheets over unencrypted HTTP. The browser considers this a security risk.</p>
+
+<h2>What causes mixed content</h2>
+<p>When you move your site from HTTP to HTTPS, some resources may still use http:// URLs. This happens with images embedded in old content, external scripts, font files, or third-party widgets. The page itself loads securely, but parts of it do not.</p>
+<p>Browsers detect this mismatch and either block the insecure resources (modern browsers block scripts and stylesheets by default) or display a warning in the address bar and developer console.</p>
+
+<h2>Active vs passive mixed content</h2>
+<p><strong>Active mixed content</strong> includes scripts, iframes, stylesheets, and fonts. Browsers block these by default because they can modify the page. An attacker could inject malicious JavaScript into an otherwise secure page.</p>
+<p><strong>Passive mixed content</strong> includes images, videos, and audio. Browsers load these but mark the page as less secure. The padlock icon changes to a warning triangle.</p>
+
+<h2>How to find mixed content</h2>
+<p>Open your browser's developer tools (F12), go to the Console tab, and look for messages like "Mixed Content: The page was loaded over HTTPS but requested an insecure image." Each message includes the exact URL of the offending resource.</p>
+<p>You can also use free tools like Why No Padlock (whynopadlock.com) or JitBit's SSL Checker to scan your entire site.</p>
+
+<h2>How to fix mixed content</h2>
+<p>The fix is straightforward: change http:// to https:// in every hardcoded resource URL. If the external resource does not support HTTPS, find an alternative provider. Most CDNs, font services, and analytics platforms support HTTPS natively.</p>
+<p>For WordPress sites, plugins like Better Search Replace can bulk-update URLs in your database. For static sites, a find-and-replace across your source files resolves the issue.</p>
+<p>Using protocol-relative URLs (starting with // instead of http:// or https://) lets the browser match the page's protocol automatically. This is a good practice for any embedded resource.</p>
+
+<div class="highlight-box"><strong>Prevention tip:</strong> Configure your CMS or build process to use HTTPS URLs by default. A Content Security Policy (CSP) header can also block mixed content before it reaches the browser.</div>
+
+<div class="related-topics"><h3>Related topics</h3><div class="related-grid"><a href="../https-importance/">Why HTTPS Matters</a><a href="../ssl-certificates/">SSL / TLS Certificates</a><a href="../security-headers/">Security Headers</a></div></div></div>
+<div class="cta-section"><h3>Find mixed content on your site</h3><p>Our audit scans every page for mixed content warnings.</p><a href="/#audit-form" class="cta-btn">Get your free audit</a></div></div></div>
+<footer><div class="container"><p><a href="/">Site Reports</a> by DS Studios | Website audits for Irish small businesses</p></div></footer>
+</body></html>
