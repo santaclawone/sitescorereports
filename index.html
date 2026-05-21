@@ -1170,51 +1170,44 @@
         </div>
     </div>
 
-    <!-- ── Test Us ── -->
-    <section class="test-section" id="test-us">
+    <!-- ── Quick check ── -->
+    <section style="padding:var(--space-2xl) 0;">
         <div class="container">
-            <div class="test-grid">
-                <div class="test-input-area">
-                    <h2>Test us. Type your URL.</h2>
-                    <p class="test-sub">Watch the checks appear as you type. Every item is what we scan in your real audit.</p>
-                    <div class="test-field">
-                        <input type="text" id="testUrlInput" placeholder="yourbusiness.ie" autocomplete="off">
-                        <button class="test-go" id="testUrlGo">Check it</button>
+            <div style="max-width:640px;margin:0 auto;text-align:center;">
+                <div style="font-size:.7rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space-md);">Quick self check</div>
+                <h2 style="font-size:1.3rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:var(--space-sm);">Six questions. One score.</h2>
+                <p style="color:var(--text-secondary);font-size:.9rem;margin-bottom:var(--space-lg);line-height:1.6;">Answer honestly. Each yes adds points. Your total estimates where your site stands today.</p>
+                <div id="quickCheck" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:left;margin-bottom:var(--space-lg);">
+                    <div class="qc-item glass" data-q="0" style="display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;user-select:none;">
+                        <div class="qc-box" style="width:22px;height:22px;border-radius:4px;border:2px solid var(--border-glass);flex-shrink:0;transition:background .2s,border-color .2s;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:transparent;"></div>
+                        <span style="font-size:.82rem;color:var(--text-secondary);line-height:1.4;">HTTPS installed and working</span>
+                    </div>
+                    <div class="qc-item glass" data-q="1" style="display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;user-select:none;">
+                        <div class="qc-box" style="width:22px;height:22px;border-radius:4px;border:2px solid var(--border-glass);flex-shrink:0;transition:background .2s,border-color .2s;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:transparent;"></div>
+                        <span style="font-size:.82rem;color:var(--text-secondary);line-height:1.4;">Site loads under 3 seconds</span>
+                    </div>
+                    <div class="qc-item glass" data-q="2" style="display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;user-select:none;">
+                        <div class="qc-box" style="width:22px;height:22px;border-radius:4px;border:2px solid var(--border-glass);flex-shrink:0;transition:background .2s,border-color .2s;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:transparent;"></div>
+                        <span style="font-size:.82rem;color:var(--text-secondary);line-height:1.4;">Works well on mobile</span>
+                    </div>
+                    <div class="qc-item glass" data-q="3" style="display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;user-select:none;">
+                        <div class="qc-box" style="width:22px;height:22px;border-radius:4px;border:2px solid var(--border-glass);flex-shrink:0;transition:background .2s,border-color .2s;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:transparent;"></div>
+                        <span style="font-size:.82rem;color:var(--text-secondary);line-height:1.4;">Shows in Google search results</span>
+                    </div>
+                    <div class="qc-item glass" data-q="4" style="display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;user-select:none;">
+                        <div class="qc-box" style="width:22px;height:22px;border-radius:4px;border:2px solid var(--border-glass);flex-shrink:0;transition:background .2s,border-color .2s;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:transparent;"></div>
+                        <span style="font-size:.82rem;color:var(--text-secondary);line-height:1.4;">Had a professional review</span>
+                    </div>
+                    <div class="qc-item glass" data-q="5" style="display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;user-select:none;">
+                        <div class="qc-box" style="width:22px;height:22px;border-radius:4px;border:2px solid var(--border-glass);flex-shrink:0;transition:background .2s,border-color .2s;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:transparent;"></div>
+                        <span style="font-size:.82rem;color:var(--text-secondary);line-height:1.4;">Updated within the last year</span>
                     </div>
                 </div>
-                <div class="test-preview">
-                    <div class="test-preview-inner">
-                        <div class="test-check-list" id="testCheckList">
-                            <div class="test-check-item" data-check="0">
-                                <div class="tci-icon pending">?</div>
-                                <div class="tci-text"><strong>HTTPS</strong> — certificate status and encryption check</div>
-                            </div>
-                            <div class="test-check-item" data-check="1">
-                                <div class="tci-icon pending">?</div>
-                                <div class="tci-text"><strong>SEO</strong> — titles, meta, headings, structure</div>
-                            </div>
-                            <div class="test-check-item" data-check="2">
-                                <div class="tci-icon pending">?</div>
-                                <div class="tci-text"><strong>Performance</strong> — page weight, images, caching</div>
-                            </div>
-                            <div class="test-check-item" data-check="3">
-                                <div class="tci-icon pending">?</div>
-                                <div class="tci-text"><strong>Mobile</strong> — viewport, touch targets, responsiveness</div>
-                            </div>
-                            <div class="test-check-item" data-check="4">
-                                <div class="tci-icon pending">?</div>
-                                <div class="tci-text"><strong>Design</strong> — code quality, favicon, framework</div>
-                            </div>
-                            <div class="test-check-item" data-check="5">
-                                <div class="tci-icon pending">?</div>
-                                <div class="tci-text"><strong>Content</strong> — link health, contact info, readability</div>
-                            </div>
-                        </div>
-                        <div class="test-hint" id="testHint">
-                            Looks good. Your real audit will include all this and more. <a href="#audit-form">Get the full report.</a>
-                        </div>
-                    </div>
+                <div id="qcResult" style="display:none;padding:16px 24px;border-radius:var(--radius-sm);margin-bottom:var(--space-md);border:1px solid var(--border-glass);">
+                    <span id="qcScoreLabel" style="font-size:1.5rem;font-weight:800;"></span>
+                    <span id="qcScoreDesc" style="font-size:.85rem;color:var(--text-secondary);display:block;margin-top:4px;"></span>
                 </div>
+                <a href="#audit-form" class="btn-primary" style="display:inline-flex;">Get your real score</a>
             </div>
         </div>
     </section>
@@ -1324,6 +1317,11 @@
 
             if (!steps.length) return;
 
+            // Set initial state: first step active
+            steps[0].classList.add('active');
+            if (arcs[0]) arcs[0].classList.add('active');
+            if (icons[0]) icons[0].classList.add('active');
+
             var observer = new IntersectionObserver(function(entries) {
                 var maxVisible = -1;
                 entries.forEach(function(entry) {
@@ -1331,7 +1329,7 @@
                     if (entry.isIntersecting && idx > maxVisible) maxVisible = idx;
                 });
 
-                var activeIdx = Math.max(0, maxVisible);
+                var activeIdx = maxVisible < 0 ? 0 : maxVisible;
 
                 steps.forEach(function(s, i) {
                     s.classList.toggle('active', i <= activeIdx);
@@ -1349,62 +1347,63 @@
             steps.forEach(function(s) { observer.observe(s); });
         })();
 
-        // ── Test-us challenge ──
+        // ── Quick self-check ──
         (function() {
-            var input = document.getElementById('testUrlInput');
-            var items = document.querySelectorAll('.test-check-item');
-            var hint = document.getElementById('testHint');
-            var goBtn = document.getElementById('testUrlGo');
+            var items = document.querySelectorAll('.qc-item');
+            var result = document.getElementById('qcResult');
+            var scoreLabel = document.getElementById('qcScoreLabel');
+            var scoreDesc = document.getElementById('qcScoreDesc');
+            if (!items.length) return;
 
-            if (!input) return;
+            var labels = [
+                'Critical issues likely. A full audit is essential.',
+                'Below average. Several areas need attention.',
+                'Room for improvement. A focused audit will help.',
+                'Solid foundation. Minor optimisations will strengthen it.',
+                'Strong site. An audit will confirm and fine-tune.',
+                'Excellent. Your site is in good shape.'
+            ];
 
-            function triggerChecks() {
-                var val = input.value.trim();
-                if (val.length < 2) {
-                    items.forEach(function(item, i) {
-                        var icon = item.querySelector('.tci-icon');
-                        item.classList.remove('visible');
-                        icon.className = 'tci-icon pending';
-                        icon.textContent = '?';
-                        var text = item.querySelector('.tci-text');
-                        text.innerHTML = text.innerHTML.replace(/style="color:[^"]+"/g, '');
-                    });
-                    if (hint) hint.classList.remove('visible');
+            items.forEach(function(item) {
+                item.addEventListener('click', function() {
+                    var box = item.querySelector('.qc-box');
+                    var checked = box.dataset.checked === 'true';
+                    if (checked) {
+                        box.dataset.checked = 'false';
+                        box.style.background = 'transparent';
+                        box.style.borderColor = 'var(--border-glass)';
+                        box.textContent = '';
+                        box.style.color = 'transparent';
+                    } else {
+                        box.dataset.checked = 'true';
+                        box.style.background = 'rgba(45,212,191,0.15)';
+                        box.style.borderColor = '#34d399';
+                        box.textContent = '\u2713';
+                        box.style.color = '#34d399';
+                    }
+                    updateScore();
+                });
+            });
+
+            function updateScore() {
+                var checked = 0;
+                items.forEach(function(item) {
+                    var box = item.querySelector('.qc-box');
+                    if (box.dataset.checked === 'true') checked++;
+                });
+
+                if (checked === 0) {
+                    result.style.display = 'none';
                     return;
                 }
 
-                items.forEach(function(item, i) {
-                    setTimeout(function() {
-                        item.classList.add('visible');
-                        var icon = item.querySelector('.tci-icon');
-                        icon.className = 'tci-icon done';
-                        icon.textContent = '\u2713';
-                        var strong = item.querySelector('strong');
-                        if (strong) strong.style.color = '#34d399';
-                    }, (i + 1) * 300);
-                });
-
-                setTimeout(function() {
-                    if (hint) hint.classList.add('visible');
-                }, items.length * 300 + 400);
-            }
-
-            input.addEventListener('input', function() {
-                // Debounce
-                clearTimeout(input._timer);
-                input._timer = setTimeout(triggerChecks, 300);
-            });
-
-            if (goBtn) {
-                goBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    triggerChecks();
-                });
-            }
-
-            // Trigger on page load if demo value present
-            if (input.value.trim().length >= 2) {
-                triggerChecks();
+                var score = checked * 16 + 4;
+                result.style.display = 'block';
+                scoreLabel.textContent = 'Est. score ' + score + '/100';
+                scoreLabel.style.color = score < 40 ? 'var(--danger)' : score < 70 ? 'var(--warning)' : 'var(--success)';
+                scoreDesc.textContent = labels[Math.min(checked, labels.length - 1)];
+                result.style.borderColor = score < 40 ? 'rgba(248,113,113,0.2)' : score < 70 ? 'rgba(251,191,36,0.2)' : 'rgba(52,211,153,0.2)';
+                result.style.background = score < 40 ? 'rgba(248,113,113,0.06)' : score < 70 ? 'rgba(251,191,36,0.06)' : 'rgba(52,211,153,0.06)';
             }
         })();
     </script>
