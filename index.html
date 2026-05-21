@@ -1023,6 +1023,11 @@
             box-shadow: 0 4px 24px rgba(0,0,0,0.3);
         }
 
+        .site-tracker.complete .tracker-dot {
+            border-color: var(--warm);
+            color: var(--warm);
+        }
+
         .site-tracker:hover,
         .site-tracker:focus-within {
             width: 200px;
@@ -1112,6 +1117,13 @@
             color: var(--text-secondary);
         }
 
+        .tracker-return {
+            font-size: .55rem;
+            color: var(--accent);
+            margin-top: 6px;
+            letter-spacing: 0.5px;
+        }
+
         @media (max-width: 600px) {
             .pulse-nav {
                 bottom: 24px;
@@ -1141,6 +1153,9 @@
                 padding: 12px 14px;
                 right: 8px;
             }
+            .site-tracker .tracker-dot {
+                font-size: .7rem;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1159,7 +1174,8 @@
                 display: none;
             }
 
-            .site-tracker { transition: none; }
+            .site-tracker,
+            .site-tracker .tracker-dot { transition: none; }
             .tracker-bar-fill { transition: none; }
         }
     </style>
@@ -1396,20 +1412,21 @@
     </footer>
 
     <!-- ── Visitor Tracking Widget ── -->
-    <div class="site-tracker" id="siteTracker" role="status" aria-live="polite" aria-label="Page viewing progress">
+    <div class="site-tracker" id="siteTracker" role="status" aria-live="polite" aria-label="Site viewing progress">
         <span class="tracker-dot" id="trackerDot">0%</span>
         <div class="tracker-content">
-            <div class="tracker-label">site browsed</div>
+            <div class="tracker-label" id="trackerLabel">pages viewed</div>
             <div class="tracker-bar-wrap">
                 <div class="tracker-bar-fill" id="trackerBar" style="width:0%"></div>
             </div>
             <div class="tracker-row">
-                <span class="label">this page</span>
+                <span class="label">total pages</span>
                 <span class="val" id="trackerPct">0%</span>
             </div>
             <div class="tracker-detail" id="trackerDetail">
-                scroll depth <span id="scrollDepthPct">0</span>% | sections <span id="sectionsSeen">0</span>/<span id="totalSections">6</span>
+                this visit: <span id="sessionsSeenPct">0</span>% | landing page scroll: <span id="scrollDepthPct">0</span>%
             </div>
+            <div class="tracker-return" id="trackerReturn" style="display:none;">returning</div>
         </div>
     </div>
 
@@ -1432,79 +1449,116 @@
                 state = saved ? JSON.parse(saved) : null;
             } catch (_) { state = null; }
 
-            if (!state || !state.session) {
+            var isNew = !state || !state.session;
+            if (isNew) {
                 state = {
                     session: Date.now(),
                     firstVisit: Date.now(),
-                    viewCount: (state?.viewCount || 0) + 1,
-                    sectionsSeen: [],
+                    visits: (state?.visits || 0) + 1,
+                    sectionsAllTime: state?.sectionsAllTime || [],
+                    sessionSections: [],
                     maxScrollPct: 0,
                     returnVisit: !!state
                 };
             } else {
-                state.viewCount = (state.viewCount || 0) + 1;
+                state.session = Date.now();
+                state.visits = (state.visits || 0) + 1;
+                state.sessionSections = [];
                 state.returnVisit = true;
             }
+
+            // If returning, carry over all-time sections
+            var initialSections = state.sectionsAllTime.slice();
 
             function saveState() {
                 try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (_) {}
             }
 
-            const trackerBar = document.getElementById('trackerBar');
-            const trackerPct = document.getElementById('trackerPct');
-            const trackerDot = document.getElementById('trackerDot');
-            const scrollDepthEl = document.getElementById('scrollDepthPct');
-            const sectionsSeenEl = document.getElementById('sectionsSeen');
-            const totalSectionsEl = document.getElementById('totalSections');
+            // DOM refs
+            var trackerEl = document.getElementById('siteTracker');
+            var trackerBar = document.getElementById('trackerBar');
+            var trackerPct = document.getElementById('trackerPct');
+            var trackerDot = document.getElementById('trackerDot');
+            var trackerLabel = document.getElementById('trackerLabel');
+            var trackerReturn = document.getElementById('trackerReturn');
+            var scrollDepthEl = document.getElementById('scrollDepthPct');
+            var sessionsSeenEl = document.getElementById('sessionsSeenPct');
 
-            const totalSlots = SECTIONS.length + 1;
+            var totalPages = SECTIONS.length;
 
-            let scrollRaf = null;
-            let latestScrollPct = 0;
+            var scrollRaf = null;
+            var latestScrollPct = 0;
 
             function getScrollDepth() {
-                const docHeight = Math.max(
+                var docHeight = Math.max(
                     document.body.scrollHeight, document.documentElement.scrollHeight,
                     document.body.offsetHeight, document.documentElement.offsetHeight,
                     document.body.clientHeight, document.documentElement.clientHeight
                 );
-                const winHeight = window.innerHeight;
-                const scrolled = window.scrollY;
-                const maxScroll = docHeight - winHeight;
+                var winHeight = window.innerHeight;
+                var scrolled = window.scrollY;
+                var maxScroll = docHeight - winHeight;
                 if (maxScroll <= 0) return 100;
                 return Math.min(100, Math.round((scrolled / maxScroll) * 100));
             }
 
             function getVisibleSections() {
                 SECTIONS.forEach(function(s) {
-                    const el = document.getElementById(s.id) || document.querySelector('[data-section="' + s.id + '"]');
+                    var el = document.getElementById(s.id) || document.querySelector('[data-section="' + s.id + '"]');
                     if (!el) return;
-                    const rect = el.getBoundingClientRect();
-                    const winH = window.innerHeight;
+                    var rect = el.getBoundingClientRect();
+                    var winH = window.innerHeight;
                     if (rect.top < winH - 50 && rect.bottom > 50) {
-                        if (!state.sectionsSeen.includes(s.id)) {
-                            state.sectionsSeen.push(s.id);
+                        // Record in all-time if not already
+                        if (state.sectionsAllTime.indexOf(s.id) === -1) {
+                            state.sectionsAllTime.push(s.id);
+                        }
+                        // Record in session if not already
+                        if (state.sessionSections.indexOf(s.id) === -1) {
+                            state.sessionSections.push(s.id);
                         }
                     }
                 });
             }
 
             function calcProgress() {
-                const scrollMetric = Math.min(1, latestScrollPct / 100);
-                const sectionsMetric = state.sectionsSeen.length / totalSlots;
-                const combined = Math.min(100, Math.round((scrollMetric * 0.4 + sectionsMetric * 0.6) * 100));
-                return { combined: combined, scrollMetric: Math.round(latestScrollPct), sectionsCount: state.sectionsSeen.length };
+                var allTimeCount = state.sectionsAllTime.length;
+                var sessionCount = state.sessionSections.length;
+                var allTimePct = Math.min(100, Math.round((allTimeCount / totalPages) * 100));
+                var sessionPct = Math.min(100, Math.round((sessionCount / totalPages) * 100));
+                var scroll = state.maxScrollPct;
+                return {
+                    allTimePct: allTimePct,
+                    sessionPct: sessionPct,
+                    scrollPct: Math.max(state.maxScrollPct, latestScrollPct),
+                    allTimeCount: allTimeCount,
+                    sessionCount: sessionCount
+                };
             }
 
             function updateTracker() {
                 if (!trackerBar) return;
-                const p = calcProgress();
-                trackerBar.style.width = p.combined + '%';
-                if (trackerPct) trackerPct.textContent = p.combined + '%';
-                if (trackerDot) trackerDot.textContent = p.combined + '%';
-                if (scrollDepthEl) scrollDepthEl.textContent = p.scrollMetric;
-                if (sectionsSeenEl) sectionsSeenEl.textContent = p.sectionsCount;
-                if (totalSectionsEl) totalSectionsEl.textContent = totalSlots;
+                var p = calcProgress();
+                var displayPct = p.allTimePct;
+
+                trackerBar.style.width = displayPct + '%';
+                if (trackerPct) trackerPct.textContent = displayPct + '%';
+                if (trackerDot) trackerDot.textContent = displayPct + '%';
+                if (scrollDepthEl) scrollDepthEl.textContent = Math.round(p.scrollPct);
+                if (sessionsSeenEl) sessionsSeenEl.textContent = p.sessionPct;
+
+                // All-time vs session indicator
+                if (p.allTimeCount >= totalPages) {
+                    if (trackerLabel) trackerLabel.textContent = 'site complete';
+                } else {
+                    if (trackerLabel) trackerLabel.textContent = 'pages viewed';
+                }
+
+                // Return indicator
+                if (state.returnVisit && trackerReturn) {
+                    trackerReturn.style.display = 'block';
+                }
+
                 saveState();
             }
 
@@ -1519,14 +1573,19 @@
                 });
             }
 
+            // Observer for section discovery
             if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver(function(entries) {
-                    let changed = false;
+                var observer = new IntersectionObserver(function(entries) {
+                    var changed = false;
                     entries.forEach(function(entry) {
                         if (entry.isIntersecting) {
                             var id = entry.target.id || entry.target.getAttribute('data-section');
-                            if (id && !state.sectionsSeen.includes(id) && SECTIONS.some(function(s) { return s.id === id; })) {
-                                state.sectionsSeen.push(id);
+                            if (id && state.sectionsAllTime.indexOf(id) === -1 && SECTIONS.some(function(s) { return s.id === id; })) {
+                                state.sectionsAllTime.push(id);
+                                changed = true;
+                            }
+                            if (id && state.sessionSections.indexOf(id) === -1 && SECTIONS.some(function(s) { return s.id === id; })) {
+                                state.sessionSections.push(id);
                                 changed = true;
                             }
                         }
@@ -1540,6 +1599,7 @@
                 });
             }
 
+            // Init
             latestScrollPct = getScrollDepth();
             state.maxScrollPct = Math.max(state.maxScrollPct, latestScrollPct);
             getVisibleSections();
