@@ -61,7 +61,6 @@
                 overflow-x: hidden;
             }
 
-            /* ── Background: Layered animated gradient orbs ── */
             body::before,
             body::after {
                 content: '';
@@ -103,7 +102,6 @@
                 100% { transform: translate(-1%, 1%) scale(0.98); }
             }
 
-            /* ── Subtle grid overlay ── */
             .bg-grid {
                 position: fixed;
                 inset: 0;
@@ -117,7 +115,6 @@
         }
 
         @layer components {
-            /* ── Glass ── */
             .glass {
                 background: var(--bg-glass);
                 backdrop-filter: blur(16px);
@@ -133,7 +130,6 @@
                 transform: translateY(-2px);
             }
 
-            /* ── Glass card with inner glow micro-interaction ── */
             .glass-card {
                 position: relative;
                 background: var(--bg-glass);
@@ -170,7 +166,6 @@
                 opacity: 1;
             }
 
-            /* ── Nav ── */
             .nav {
                 position: fixed;
                 top: 0;
@@ -221,13 +216,10 @@
                 letter-spacing: .02em;
             }
 
-            /* ── Container ── */
             .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-lg); }
 
-            /* ── Sections ── */
             section { padding: var(--space-2xl) 0; }
 
-            /* ── Hero ── */
             .hero {
                 padding: calc(var(--nav-height) + var(--space-2xl)) 0 var(--space-xl);
                 min-height: 90vh;
@@ -250,30 +242,17 @@
                 display: inline-flex;
                 align-items: center;
                 gap: 8px;
-                background: rgba(45,212,191,0.08);
-                border: 1px solid rgba(45,212,191,0.15);
                 color: var(--accent);
-                font-size: .75rem;
+                font-size: .7rem;
                 font-weight: 600;
-                padding: 6px 16px;
-                border-radius: 20px;
                 margin-bottom: var(--space-lg);
-                letter-spacing: .03em;
+                letter-spacing: .05em;
                 text-transform: uppercase;
             }
 
-            .hero-badge::before {
-                content: '';
-                width: 6px;
-                height: 6px;
-                border-radius: 50%;
-                background: var(--accent);
-                animation: pulse-dot 2s ease-in-out infinite;
-            }
-
-            @keyframes pulse-dot {
-                0%, 100% { opacity: 1; }
-                50% { opacity: .3; }
+            .hero-badge span {
+                opacity: .4;
+                margin: 0 8px;
             }
 
             .hero h1 {
@@ -331,7 +310,6 @@
                 color: var(--text-muted);
             }
 
-            /* ── Hero visual (right side) ── */
             .hero-visual {
                 position: relative;
                 display: flex;
@@ -404,7 +382,6 @@
                 to { opacity: 1; transform: translateY(0); }
             }
 
-            /* ── Stats ── */
             .stats-grid {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
@@ -438,7 +415,6 @@
                 font-weight: 500;
             }
 
-            /* ── Section titles ── */
             .section-label {
                 font-size: .7rem;
                 font-weight: 600;
@@ -464,7 +440,6 @@
                 margin-bottom: var(--space-xl);
             }
 
-            /* ── How it works: asymmetric grid ── */
             .steps-grid {
                 display: grid;
                 grid-template-columns: 1.2fr 0.8fr 1fr;
@@ -506,7 +481,6 @@
                 line-height: 1.6;
             }
 
-            /* ── Checks: asymmetric staggered grid ── */
             .checks-grid {
                 display: grid;
                 grid-template-columns: 2fr 1fr 2fr;
@@ -539,7 +513,6 @@
                 line-height: 1.6;
             }
 
-            /* ── Form ── */
             .form-section {
                 padding: var(--space-2xl) 0;
             }
@@ -677,7 +650,6 @@
                 to { transform: rotate(360deg); }
             }
 
-            /* ── Footer ── */
             footer {
                 padding: var(--space-xl) 0;
                 border-top: 1px solid var(--border-glass);
@@ -698,7 +670,6 @@
                 opacity: .7;
             }
 
-            /* ── Reveal animations ── */
             .reveal {
                 opacity: 0;
                 transform: translateY(30px);
@@ -714,6 +685,54 @@
             .reveal-delay-2 { transition-delay: .1s; }
             .reveal-delay-3 { transition-delay: .2s; }
             .reveal-delay-4 { transition-delay: .3s; }
+
+            /* ── Sample strip ── */
+            .sample-strip {
+                padding: var(--space-xl) 0;
+                border-top: 1px solid var(--border-glass);
+                border-bottom: 1px solid var(--border-glass);
+                background: rgba(45,212,191,0.02);
+            }
+
+            .sample-strip .container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: var(--space-lg);
+            }
+
+            .ss-text h3 {
+                font-size: 1.05rem;
+                font-weight: 600;
+                margin-bottom: 4px;
+            }
+
+            .ss-text p {
+                font-size: .82rem;
+                color: var(--text-secondary);
+                max-width: 440px;
+                line-height: 1.5;
+            }
+
+            .ss-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                padding: 12px 24px;
+                border-radius: var(--radius-sm);
+                background: var(--bg-glass);
+                border: 1px solid var(--border-glass);
+                font-size: .85rem;
+                font-weight: 600;
+                color: var(--text-primary);
+                transition: background .2s, border-color .2s;
+                white-space: nowrap;
+            }
+
+            .ss-btn:hover {
+                background: var(--bg-glass-hover);
+                border-color: var(--border-glass-hover);
+            }
         }
 
         @layer utilities {
@@ -726,7 +745,6 @@
         }
 
         @layer animations {
-            /* scroll-driven animation support — graceful degradation */
             @supports (animation-timeline: scroll()) {
                 .hero-title-anim {
                     animation: heroReveal linear forwards;
@@ -747,7 +765,6 @@
             }
         }
 
-        /* ── Responsive ── */
         @media (max-width: 900px) {
             .hero-content {
                 grid-template-columns: 1fr;
@@ -820,6 +837,20 @@
                 text-align: center;
                 font-size: .8rem;
             }
+
+            .sample-strip .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .ss-text p {
+                max-width: none;
+            }
+
+            .ss-btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
 
         /* ── Circular Pulse Nav ── */
@@ -864,7 +895,6 @@
             opacity: .6;
         }
 
-        /* ── Pulse ring ── */
         .pulse-ring {
             position: absolute;
             inset: -8px;
@@ -884,7 +914,6 @@
             100% { transform: scale(1.7); opacity: 0; }
         }
 
-        /* ── Nav menu ── */
         .pulse-menu {
             position: absolute;
             bottom: 68px;
@@ -918,10 +947,9 @@
             font-size: .9rem;
             font-weight: 500;
             color: var(--text-secondary);
-            transition: background .2s, color .2s;
+            transition: background .2s, color .2s, opacity .25s ease, transform .25s ease;
             opacity: 0;
             transform: translateY(8px);
-            transition: background .2s, color .2s, opacity .25s ease, transform .25s ease;
         }
 
         .pulse-menu.open a {
@@ -958,7 +986,6 @@
             opacity: 1;
         }
 
-        /* ── Pulse overlay ── */
         .pulse-overlay {
             position: fixed;
             inset: 0;
@@ -972,6 +999,117 @@
         .pulse-overlay.open {
             opacity: 1;
             pointer-events: all;
+        }
+
+        /* ── Visitor Tracking Widget ── */
+        .site-tracker {
+            position: fixed;
+            bottom: 100px;
+            right: 24px;
+            z-index: 300;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(7,11,26,0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(200,168,124,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: help;
+            transition: width 0.3s, height 0.3s, border-radius 0.3s, box-shadow 0.3s, background 0.3s;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+        }
+
+        .site-tracker:hover,
+        .site-tracker:focus-within {
+            width: 200px;
+            height: auto;
+            border-radius: 12px;
+            padding: 14px 16px;
+            background: rgba(7,11,26,0.8);
+            cursor: default;
+        }
+
+        .site-tracker .tracker-dot {
+            font-size: .8rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            line-height: 1;
+            transition: opacity 0.2s;
+        }
+
+        .site-tracker:hover .tracker-dot,
+        .site-tracker:focus-within .tracker-dot {
+            display: none;
+        }
+
+        .tracker-content {
+            display: none;
+            width: 100%;
+        }
+
+        .site-tracker:hover .tracker-content,
+        .site-tracker:focus-within .tracker-content {
+            display: block;
+        }
+
+        .tracker-content .tracker-label {
+            font-size: .55rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .tracker-bar-wrap {
+            height: 4px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 2px;
+            position: relative;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+
+        .tracker-bar-fill {
+            height: 100%;
+            background: var(--warm);
+            width: 0%;
+            transition: width 0.4s ease;
+            border-radius: 2px;
+        }
+
+        .tracker-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: .65rem;
+            font-weight: 600;
+        }
+
+        .tracker-row .val {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .tracker-row .label {
+            color: var(--text-muted);
+        }
+
+        .tracker-detail {
+            font-size: .55rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+            line-height: 1.4;
+            padding-top: 6px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .tracker-detail span {
+            font-weight: 600;
+            color: var(--text-secondary);
         }
 
         @media (max-width: 600px) {
@@ -991,6 +1129,18 @@
                 right: 0;
                 min-width: 190px;
             }
+            .site-tracker {
+                bottom: 88px;
+                right: 16px;
+                width: 42px;
+                height: 42px;
+            }
+            .site-tracker:hover,
+            .site-tracker:focus-within {
+                width: 180px;
+                padding: 12px 14px;
+                right: 8px;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1008,6 +1158,9 @@
             .pulse-ring {
                 display: none;
             }
+
+            .site-tracker { transition: none; }
+            .tracker-bar-fill { transition: none; }
         }
     </style>
 </head>
@@ -1026,8 +1179,8 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <div class="hero-text">
-                    <div class="hero-badge">Free Website Audit</div>
+                <div class="hero-text" data-section="hero">
+                    <div class="hero-badge">free audit <span>|</span> no signup</div>
                     <h1>
                         Your site<br>
                         <span class="gradient-text">revealed.</span>
@@ -1054,7 +1207,7 @@
     </section>
 
     <!-- ── Stats ── -->
-    <section>
+    <section id="stats" data-section="stats">
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-card reveal reveal-delay-1">
@@ -1074,7 +1227,7 @@
     </section>
 
     <!-- ── Process ── -->
-    <section>
+    <section id="process" data-section="process">
         <div class="container">
             <div class="section-label">Process</div>
             <h2 class="section-title">How it works</h2>
@@ -1105,7 +1258,7 @@
     </section>
 
     <!-- ── What we check ── -->
-    <section>
+    <section id="categories" data-section="categories">
         <div class="container">
             <div class="section-label">Categories</div>
             <h2 class="section-title">What we check</h2>
@@ -1154,7 +1307,7 @@
     </div>
 
     <!-- ── Quick check ── -->
-    <section style="padding:var(--space-2xl) 0;">
+    <section id="quick-check" data-section="quick-check" style="padding:var(--space-2xl) 0;">
         <div class="container">
             <div style="max-width:640px;margin:0 auto;text-align:center;">
                 <div style="font-size:.7rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space-md);">Quick self check</div>
@@ -1196,7 +1349,7 @@
     </section>
 
     <!-- ── Form ── -->
-    <section class="form-section" id="audit-form">
+    <section class="form-section" id="audit-form" data-section="audit-form">
         <div class="container">
             <div class="form-wrap">
                 <h2>Request your report</h2>
@@ -1242,7 +1395,163 @@
         </div>
     </footer>
 
+    <!-- ── Visitor Tracking Widget ── -->
+    <div class="site-tracker" id="siteTracker" role="status" aria-live="polite" aria-label="Page viewing progress">
+        <span class="tracker-dot" id="trackerDot">0%</span>
+        <div class="tracker-content">
+            <div class="tracker-label">site browsed</div>
+            <div class="tracker-bar-wrap">
+                <div class="tracker-bar-fill" id="trackerBar" style="width:0%"></div>
+            </div>
+            <div class="tracker-row">
+                <span class="label">this page</span>
+                <span class="val" id="trackerPct">0%</span>
+            </div>
+            <div class="tracker-detail" id="trackerDetail">
+                scroll depth <span id="scrollDepthPct">0</span>% | sections <span id="sectionsSeen">0</span>/<span id="totalSections">6</span>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // ── Visitor tracking ──
+        (function() {
+            const STORAGE_KEY = 'sitescorereports_visit';
+            const SECTIONS = [
+                { id: 'hero', label: 'hero' },
+                { id: 'stats', label: 'stats' },
+                { id: 'process', label: 'process' },
+                { id: 'categories', label: 'checks' },
+                { id: 'quick-check', label: 'self check' },
+                { id: 'audit-form', label: 'form' }
+            ];
+
+            let state;
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                state = saved ? JSON.parse(saved) : null;
+            } catch (_) { state = null; }
+
+            if (!state || !state.session) {
+                state = {
+                    session: Date.now(),
+                    firstVisit: Date.now(),
+                    viewCount: (state?.viewCount || 0) + 1,
+                    sectionsSeen: [],
+                    maxScrollPct: 0,
+                    returnVisit: !!state
+                };
+            } else {
+                state.viewCount = (state.viewCount || 0) + 1;
+                state.returnVisit = true;
+            }
+
+            function saveState() {
+                try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (_) {}
+            }
+
+            const trackerBar = document.getElementById('trackerBar');
+            const trackerPct = document.getElementById('trackerPct');
+            const trackerDot = document.getElementById('trackerDot');
+            const scrollDepthEl = document.getElementById('scrollDepthPct');
+            const sectionsSeenEl = document.getElementById('sectionsSeen');
+            const totalSectionsEl = document.getElementById('totalSections');
+
+            const totalSlots = SECTIONS.length + 1;
+
+            let scrollRaf = null;
+            let latestScrollPct = 0;
+
+            function getScrollDepth() {
+                const docHeight = Math.max(
+                    document.body.scrollHeight, document.documentElement.scrollHeight,
+                    document.body.offsetHeight, document.documentElement.offsetHeight,
+                    document.body.clientHeight, document.documentElement.clientHeight
+                );
+                const winHeight = window.innerHeight;
+                const scrolled = window.scrollY;
+                const maxScroll = docHeight - winHeight;
+                if (maxScroll <= 0) return 100;
+                return Math.min(100, Math.round((scrolled / maxScroll) * 100));
+            }
+
+            function getVisibleSections() {
+                SECTIONS.forEach(function(s) {
+                    const el = document.getElementById(s.id) || document.querySelector('[data-section="' + s.id + '"]');
+                    if (!el) return;
+                    const rect = el.getBoundingClientRect();
+                    const winH = window.innerHeight;
+                    if (rect.top < winH - 50 && rect.bottom > 50) {
+                        if (!state.sectionsSeen.includes(s.id)) {
+                            state.sectionsSeen.push(s.id);
+                        }
+                    }
+                });
+            }
+
+            function calcProgress() {
+                const scrollMetric = Math.min(1, latestScrollPct / 100);
+                const sectionsMetric = state.sectionsSeen.length / totalSlots;
+                const combined = Math.min(100, Math.round((scrollMetric * 0.4 + sectionsMetric * 0.6) * 100));
+                return { combined: combined, scrollMetric: Math.round(latestScrollPct), sectionsCount: state.sectionsSeen.length };
+            }
+
+            function updateTracker() {
+                if (!trackerBar) return;
+                const p = calcProgress();
+                trackerBar.style.width = p.combined + '%';
+                if (trackerPct) trackerPct.textContent = p.combined + '%';
+                if (trackerDot) trackerDot.textContent = p.combined + '%';
+                if (scrollDepthEl) scrollDepthEl.textContent = p.scrollMetric;
+                if (sectionsSeenEl) sectionsSeenEl.textContent = p.sectionsCount;
+                if (totalSectionsEl) totalSectionsEl.textContent = totalSlots;
+                saveState();
+            }
+
+            function onScroll() {
+                if (scrollRaf) return;
+                scrollRaf = requestAnimationFrame(function() {
+                    scrollRaf = null;
+                    latestScrollPct = Math.max(latestScrollPct, getScrollDepth());
+                    state.maxScrollPct = Math.max(state.maxScrollPct, latestScrollPct);
+                    getVisibleSections();
+                    updateTracker();
+                });
+            }
+
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver(function(entries) {
+                    let changed = false;
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            var id = entry.target.id || entry.target.getAttribute('data-section');
+                            if (id && !state.sectionsSeen.includes(id) && SECTIONS.some(function(s) { return s.id === id; })) {
+                                state.sectionsSeen.push(id);
+                                changed = true;
+                            }
+                        }
+                    });
+                    if (changed) updateTracker();
+                }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+
+                SECTIONS.forEach(function(s) {
+                    var el = document.getElementById(s.id) || document.querySelector('[data-section="' + s.id + '"]');
+                    if (el) observer.observe(el);
+                });
+            }
+
+            latestScrollPct = getScrollDepth();
+            state.maxScrollPct = Math.max(state.maxScrollPct, latestScrollPct);
+            getVisibleSections();
+            updateTracker();
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', function() {
+                latestScrollPct = Math.max(latestScrollPct, getScrollDepth());
+                updateTracker();
+            }, { passive: true });
+        })();
+
         // ── Scroll reveal via IntersectionObserver ──
         (function() {
             const observer = new IntersectionObserver((entries) => {
@@ -1261,7 +1570,6 @@
         window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
         formspree('initForm', { formElement: '#auditForm', formId: 'xvzykdlr' });
 
-        // ── Custom submit button text toggle ──
         document.addEventListener('fs_submitting', function(e) {
             if (e.detail && e.detail.formElement === '#auditForm') {
                 const btn = document.querySelector('#auditForm [data-fs-submit-btn]');
@@ -1278,10 +1586,7 @@
                 btn.disabled = false;
             }
         });
-    </script>
-    <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
-    <script>
         // ── Quick self-check ──
         (function() {
             var items = document.querySelectorAll('.qc-item');
@@ -1335,13 +1640,15 @@
                 var score = checked * 16 + 4;
                 result.style.display = 'block';
                 scoreLabel.textContent = 'Est. score ' + score + '/100';
-                scoreLabel.style.color = score < 40 ? 'var(--danger)' : score < 70 ? 'var(--warning)' : 'var(--success)';
                 scoreDesc.textContent = labels[Math.min(checked, labels.length - 1)];
-                result.style.borderColor = score < 40 ? 'rgba(248,113,113,0.2)' : score < 70 ? 'rgba(251,191,36,0.2)' : 'rgba(52,211,153,0.2)';
-                result.style.background = score < 40 ? 'rgba(248,113,113,0.06)' : score < 70 ? 'rgba(251,191,36,0.06)' : 'rgba(52,211,153,0.06)';
+                var c = score < 40 ? 'rgba(248,113,113,0.2)' : score < 70 ? 'rgba(251,191,36,0.2)' : 'rgba(52,211,153,0.2)';
+                var bg = score < 40 ? 'rgba(248,113,113,0.06)' : score < 70 ? 'rgba(251,191,36,0.06)' : 'rgba(52,211,153,0.06)';
+                result.style.borderColor = c;
+                result.style.background = bg;
             }
         })();
     </script>
+    <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
     <!-- ── Circular Pulse Nav ── -->
     <div class="pulse-overlay" id="pulseOverlay"></div>
